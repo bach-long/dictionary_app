@@ -1,3 +1,10 @@
 lưu file dữ liệu db vào resource
 ko cần file jar hay sqlite 3
-dùng maven, chỉnh file pom và module-info(tại main/java) theo như file pom và module-info tại đây
+dùng maven, chỉnh file module-info(tại main/java) như tại đây
+thêm thẻ dependency này vào file pom.xml:
+
+<dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.36.0.3</version>
+        </dependency> 
