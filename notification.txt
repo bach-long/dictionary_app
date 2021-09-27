@@ -1,0 +1,3 @@
+lưu file dữ liệu db vào resource
+nhớ download cả file sqlite3
+add file jar vào libraries tại project structure
