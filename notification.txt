@@ -1,3 +1,3 @@
 lưu file dữ liệu db vào resource
-nhớ download cả file sqlite3
-add file jar vào libraries tại project structure
+ko cần file jar hay sqlite 3
+dùng maven, chỉnh file pom và module-info(tại main/java) theo như file pom và module-info tại đây
