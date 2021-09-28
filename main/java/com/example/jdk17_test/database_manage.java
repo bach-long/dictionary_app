@@ -1,3 +1,5 @@
+package com.example.jdk17_test;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,24 +35,26 @@ public class database_manage {
         c.close();
     }
 
-    public static String search() throws SQLException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s="";
-        try {
-            rs = stmt.executeQuery(String.format("select * from av where word = '%s'",br.readLine().toLowerCase()));
-            String word = rs.getString("word");
-            String prc = rs.getString("pronounce");
-            s = s + word + "\n"  + prc + "\n";
-            while(rs.next()) {
-                String drc = rs.getString("description");
-                s = s + drc + "\n";
-            }
-            rs.close();
-        } catch (IOException e) {
-            System.out.println( e.getMessage() );
-            rs.close();
+    public static String search(String br) throws SQLException{
+        String s="Phát âm: ";
+        if(br == null) {
+            return "";
+        } else {
+                rs = stmt.executeQuery(String.format("select * from av where word = '%s'", br.toLowerCase()));
+                if (rs == null) {
+                    return "This word doesn't exist";
+                }
+                String prc = rs.getString("pronounce");
+                s = s + prc + "\n";
+                while (rs.next()) {
+                    String drc = rs.getString("html");
+                    s = s + drc + "\n";
+                }
+                rs.close();
+                return s;
         }
-        return s;
     }
+
+
 }
 
