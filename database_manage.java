@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.lang.String;
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.sql.Timestamp;
 
@@ -78,8 +79,8 @@ public class database_manage {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         pstsm = c.prepareStatement("INSERT INTO user (word, definition, time) VALUES (?,?,?)");
-        pstsm.setString(1,word);
-        pstsm.setString(2,mean);
+        pstsm.setString(1,word.toLowerCase());
+        pstsm.setString(2,mean.toLowerCase());
         pstsm.setString(3,sdf.format(timestamp));
         pstsm.execute();
         if (pstsm == null){}
@@ -93,9 +94,9 @@ public class database_manage {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         pstsm = c.prepareStatement("UPDATE user SET DEFINITION = ?, time = ? WHERE word = ?");
-        pstsm.setString(1,mean);
+        pstsm.setString(1,mean.toLowerCase());
         pstsm.setString(2, sdf.format(timestamp));
-        pstsm.setString(3,word);
+        pstsm.setString(3,word.toLowerCase(Locale.ROOT));
         pstsm.execute();
         if (pstsm == null){}
         else {
