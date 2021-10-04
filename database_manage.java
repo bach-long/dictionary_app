@@ -18,6 +18,7 @@ public class database_manage {
     static ResultSet rs = null;
     static PreparedStatement pstsm = null;
 
+    /** khoi tao. */
     public static void set_database() {
         try {
             c = DriverManager.getConnection("jdbc:sqlite:./src/main/resources/dict_avva.db");
@@ -29,6 +30,7 @@ public class database_manage {
         }
     }
 
+    /** dong. */
     public static void close_database() throws SQLException {
         if(rs == null) {}
         else {
@@ -42,6 +44,7 @@ public class database_manage {
         c.close();
     }
 
+    /** tim kiem trong database goc. */
     public static String search(String r) throws SQLException{
         String s="";
         rs = stmt.executeQuery(String.format("select * from av where word = '%s'", r.toLowerCase()));
@@ -57,6 +60,7 @@ public class database_manage {
         return s;
     }
 
+    /** list cac tu.*/
     public static String[] list_word() throws SQLException {
         rs = stmt.executeQuery("select * from av");
         Set<String> a = new LinkedHashSet<> ();
@@ -69,6 +73,7 @@ public class database_manage {
         return result;
     }
 
+    /** nguoi dung them vao.*/
     public static void user_add (String word, String mean) throws SQLException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -83,6 +88,7 @@ public class database_manage {
         }
     }
 
+    /** nguoi dung chinh sua.*/
     public static void make_change (String word, String mean) throws SQLException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -97,6 +103,7 @@ public class database_manage {
         }
     }
 
+    /** xoa. */
     public static void user_delete (String s) throws SQLException {
         pstsm = c.prepareStatement("DELETE FROM user WHERE word = ?");
         pstsm.setString(1,s);
@@ -107,6 +114,7 @@ public class database_manage {
         }
     }
 
+    /**tim kiem trong database cua nguoi dung.*/
     public static String user_search(String r) throws SQLException {
         String s="";
             rs = stmt.executeQuery(String.format("select * from user where word = '%s'", r.toLowerCase()));
