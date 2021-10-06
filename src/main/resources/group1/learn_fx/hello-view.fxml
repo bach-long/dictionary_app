@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="697.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group1.learn_fx.HelloController">
+   <children>
+      <TextField fx:id="tfinput" layoutX="37.0" layoutY="49.0" prefHeight="26.0" prefWidth="283.0" />
+      <Button fx:id="bt" layoutX="348.0" layoutY="49.0" mnemonicParsing="false" onAction="#submit" prefHeight="26.0" prefWidth="68.0" text="Trans" />
+      <Label fx:id="tf_label" layoutX="38.0" layoutY="21.0" prefHeight="18.0" prefWidth="258.0" text="search something" />
+      <WebView fx:id="html_view" layoutX="32.0" layoutY="98.0" prefHeight="116.0" prefWidth="634.0" />
+      <Button fx:id="prg" layoutX="349.0" layoutY="242.0" mnemonicParsing="false" onAction="#trans_prg" prefHeight="26.0" prefWidth="142.0" text="paragraph translation" />
+      <WebView fx:id="prg_view" layoutX="346.0" layoutY="279.0" prefHeight="252.0" prefWidth="334.0" />
+      <Label layoutX="32.0" layoutY="246.0" prefHeight="18.0" prefWidth="207.0" text="paragraph" />
+      <TextArea fx:id="input_prg" layoutX="14.0" layoutY="279.0" prefHeight="252.0" prefWidth="312.0" />
+      <Button fx:id="speak" layoutX="433.0" layoutY="50.0" mnemonicParsing="false" onAction="#handle" prefHeight="26.0" prefWidth="79.0" text="Audio" />
+   </children>
+</AnchorPane>
