@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Login">
+   <children>
+      <BorderPane layoutX="186.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FF6767;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="nameLogin" onKeyPressed="#inputName" prefHeight="26.0" prefWidth="306.0" />
+                  <Region prefHeight="84.0" prefWidth="312.0" />
+                  <Button fx:id="nextLogin" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#nameLogin" prefHeight="26.0" prefWidth="243.0" text="Button" />
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <ImageView fx:id="logo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../../java/image/LOGO.png" />
+               </image>
+            </ImageView>
+         </top>
+         <left>
+            <VBox prefHeight="550.0" prefWidth="286.0" style="-fx-background-color: #FF6767;" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <VBox prefHeight="550.0" prefWidth="202.0" style="-fx-background-color: #FF6767;" BorderPane.alignment="CENTER" />
+         </right>
+         <bottom>
+            <VBox prefHeight="242.0" prefWidth="800.0" style="-fx-background-color: FF6767;" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>
