@@ -47,18 +47,22 @@ public class database_manage {
 
     /** tim kiem trong database goc. */
     public static String search(String r) throws SQLException{
+        r = r.trim();
+        r = r.replaceAll("\\s+","");
         String s="";
         rs = stmt.executeQuery(String.format("select * from av where word = '%s'", r.toLowerCase()));
         while (rs.next()) {
             String drc = rs.getString("html");
             s = s + drc + "\n";
-
         }
-        if(rs==null) {}
-        else {
-            rs.close();
+        if(s == ""){
+            return "<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>";
         }
+        if(rs == null) {}
+        else
+        rs.close();
         return s;
+
     }
 
     /** list cac tu.*/
@@ -76,13 +80,19 @@ public class database_manage {
 
     /** nguoi dung them vao.*/
     public static void user_add (String word, String mean) throws SQLException {
+        word = word.replace("\n","<br>");
+        mean = mean.replace("\n","<br>");
+        word = word.trim();
+        mean = mean.trim();
+        word = word.replaceAll("\\s+"," ");
+        mean = mean.replaceAll("\\s+"," ");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         pstsm = c.prepareStatement("INSERT INTO user (word, definition, time) VALUES (?,?,?)");
         pstsm.setString(1,word.toLowerCase());
         pstsm.setString(2,mean.toLowerCase());
         pstsm.setString(3,sdf.format(timestamp));
-        pstsm.execute();
+        pstsm.executeUpdate();
         if (pstsm == null){}
         else {
             pstsm.close();
@@ -93,11 +103,17 @@ public class database_manage {
     public static void make_change (String word, String mean) throws SQLException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        word = word.replace("\n","<br>");
+        mean = mean.replace("\n","<br>");
+        word = word.trim();
+        mean = mean.trim();
+        word = word.replaceAll("\\s+"," ");
+        mean = mean.replaceAll("\\s+"," ");
         pstsm = c.prepareStatement("UPDATE user SET DEFINITION = ?, time = ? WHERE word = ?");
         pstsm.setString(1,mean.toLowerCase());
         pstsm.setString(2, sdf.format(timestamp));
         pstsm.setString(3,word.toLowerCase(Locale.ROOT));
-        pstsm.execute();
+        pstsm.executeUpdate();
         if (pstsm == null){}
         else {
             pstsm.close();
@@ -105,10 +121,13 @@ public class database_manage {
     }
 
     /** xoa. */
-    public static void user_delete (String s) throws SQLException {
+    public static void user_delete (String word) throws SQLException {
         pstsm = c.prepareStatement("DELETE FROM user WHERE word = ?");
-        pstsm.setString(1,s);
-        pstsm.execute();
+        word = word.replace("\n","<br>");
+        word = word.trim();
+        word = word.replaceAll("\\s+"," ");
+        pstsm.setString(1,word);
+        pstsm.executeUpdate();
         if (pstsm == null){}
         else {
             pstsm.close();
@@ -118,16 +137,20 @@ public class database_manage {
     /**tim kiem trong database cua nguoi dung.*/
     public static String user_search(String r) throws SQLException {
         String s="";
-            rs = stmt.executeQuery(String.format("select * from user where word = '%s'", r.toLowerCase()));
-            while (rs.next()) {
-                String drc = rs.getString("definition");
-                s = s + drc + "\n";
-
-            }
+        r = r.trim();
+        r = r.replaceAll("\\s+"," ");
+        rs = stmt.executeQuery(String.format("select * from user where word = '%s'", r.toLowerCase()));
+        while (rs.next()) {
+            String drc = rs.getString("definition");
+            s = s + drc;
+        }
+        if (s == "") {
+            return "<h1 style=\"color:Tomato;\"> This word was deleted or not yet added </h1>";
+        }
         if(rs == null) {}
         else
         rs.close();
-        return s;
+        return "<h2>" + s + "</h2>";
     }
 }
 
