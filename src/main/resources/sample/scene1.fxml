@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="parentContro" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Scene2Controller">
+   <children>
+      <BorderPane layoutX="223.0" layoutY="222.0" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor2" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <VBox prefHeight="180.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="226.0" prefWidth="800.0" stylesheets="@styles.css">
+                     <children>
+                        <Text fx:id="text" fill="#ff2b71" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" textAlignment="CENTER" wrappingWidth="773.3366508483887">
+                           <font>
+                              <Font name="Calibri Light" size="85.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </top>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="134.0" prefWidth="800.0" styleClass="backgroundColor2" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <StackPane prefHeight="314.0" prefWidth="86.0">
+                     <children>
+                        <Circle fx:id="c1" fill="#1f93ff00" radius="29.0" stroke="#ff3a3af5" strokeType="INSIDE" strokeWidth="6.0" style="-fx-stroke-dash-array: 20;">
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </Circle>
+                     </children>
+                  </StackPane>
+                  <Text fill="#fa287c" strokeType="OUTSIDE" strokeWidth="0.0" text="LOADING..." wrappingWidth="312.8519592285156">
+                     <font>
+                        <Font name="Cambria" size="57.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+         </bottom>
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="364.0" prefWidth="800.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="370.0" fitWidth="418.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/LOGO.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

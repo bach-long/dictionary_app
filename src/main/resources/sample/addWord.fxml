@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" styleClass="backgroundColor" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddWord">
+   <children>
+      <JFXButton fx:id="add" buttonType="RAISED" layoutX="390.0" layoutY="512.0" onMouseClicked="#add_new_Word" ripplerFill="#fa1616" styleClass="backgroundColor2" stylesheets="@styles.css" text="ADD" />
+      <TextArea fx:id="wordAddIn" layoutX="152.0" layoutY="130.0" prefHeight="62.0" prefWidth="496.0" promptText="Nhập từ cần add" />
+      <TextArea fx:id="meanAddIn" layoutX="152.0" layoutY="262.0" prefHeight="218.0" prefWidth="496.0" promptText="Nghĩa của từ" />
+      <JFXButton fx:id="prev" buttonType="RAISED" layoutY="1.0" onMouseClicked="#prevController" styleClass="backgroundColor2" stylesheets="@styles.css" text="prev" />
+   </children>
+</AnchorPane>

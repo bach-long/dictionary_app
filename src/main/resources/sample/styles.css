@@ -1,0 +1,11 @@
+.backgroundColor{
+    -fx-background-color: linear-gradient(to right bottom,#FF6767, #E839F6);
+}
+
+.backgroundColor2{
+    -fx-background-color: linear-gradient(to left bottom, #E839F6,#61D8DE);
+}
+.textBoxSearch{
+     -fx-background-color: #FFFFFF;
+     -fx-background-radius: 60;
+}
