@@ -8,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.lang.String;
 import java.text.SimpleDateFormat;
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.sql.Timestamp;
 
 public class database_manage {
@@ -56,6 +54,7 @@ public class database_manage {
             s = s + drc + "\n";
         }
         if(s == ""){
+            rs.close();
             return "<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>";
         }
         if(rs == null) {}
@@ -145,7 +144,7 @@ public class database_manage {
             s = s + drc;
         }
         if (s == "") {
-            return "<h1 style=\"color:Tomato;\"> This word was deleted or not yet added </h1>";
+            return "<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>";
         }
         if(rs == null) {}
         else
