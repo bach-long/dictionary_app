@@ -90,6 +90,14 @@ public class HelloController implements Initializable {
         }
     }
 
+    public void audioAction (ActionEvent event) throws SQLException {
+        try {
+            TextToSpeech speech = new TextToSpeech();
+            speech.toSpeech(tfinput.getText());
+        } catch(Exception e) {
+            engine.loadContent("<h1>This word doesn't exist</h1>");
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rsc) {
