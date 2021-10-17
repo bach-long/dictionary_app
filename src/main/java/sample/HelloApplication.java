@@ -16,9 +16,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-       //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
-       //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("addWord.fxml"));
+       FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+       //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("scene1.fxml"));
+       //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("wordMemo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("DICTIONARY!");
         stage.setScene(scene);

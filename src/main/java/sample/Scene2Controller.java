@@ -31,7 +31,7 @@ public class Scene2Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setRotate(c1, true, 250, 10);
+        setRotate(c1, true, 1000, 10);
         TextOutput textOutput = new TextOutput() {
             @Override
             public void writeText(String textOut) {
@@ -44,8 +44,8 @@ public class Scene2Controller implements Initializable {
             }
         };
 
-        textAnimation = new TextAnimation("Hello " + Login.name + "!",
-                100, textOutput);
+        textAnimation = new TextAnimation("Hello!!",
+                150, textOutput);
         Thread thread = new Thread(textAnimation);
         thread.start();
     }
@@ -58,7 +58,7 @@ public class Scene2Controller implements Initializable {
         rotateTransition.setByAngle(angle);
         rotateTransition.setDelay(Duration.seconds(0));
         rotateTransition.setRate(5);
-        rotateTransition.setCycleCount(3);
+        rotateTransition.setCycleCount(2);
         rotateTransition.play();;
 
         rotateTransition.setOnFinished((e)->{

@@ -22,7 +22,7 @@ public class TextAnimation implements Runnable{
                 String textAtThisPoint = text.substring(0,i);
 
                 textOutput.writeText(textAtThisPoint);
-                Thread.sleep(animationTime + random.nextInt(150));
+                Thread.sleep(animationTime + random.nextInt(50));
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
@@ -13,27 +14,42 @@
    <children>
       <BorderPane layoutX="186.0" layoutY="125.0" prefHeight="575.0" prefWidth="800.0" styleClass="backgroundColor2" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <VBox alignment="CENTER" prefHeight="274.0" prefWidth="267.0" BorderPane.alignment="CENTER" />
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="674.0" prefWidth="335.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="381.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                           <image>
+                              <Image url="@../image/LOGO.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="700.0" prefWidth="354.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <AnchorPane prefHeight="219.0" prefWidth="410.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <JFXButton fx:id="nextLogin" buttonType="RAISED" layoutX="386.0" layoutY="1.0" prefHeight="26.0" prefWidth="50.0" styleClass="backgroundColor" stylesheets="@styles.css" text="Skip" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <ImageView fitHeight="97.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/person.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER" prefHeight="66.0" prefWidth="410.0">
+                           <children>
+                              <TextField fx:id="nameLogin" onKeyPressed="#inputName" prefHeight="33.0" prefWidth="262.0" promptText="Nhập tên tại đây" style="-fx-background-radius: 60;" />
+                           </children>
+                        </HBox>
+                        <Region prefHeight="21.0" prefWidth="410.0" />
+                        <JFXButton fx:id="loginButton" buttonType="RAISED" prefHeight="30.0" prefWidth="244.0" style="-fx-background-radius: 60;" styleClass="backgroundColor" stylesheets="@styles.css" text="Login" />
+                        <Region prefHeight="302.0" prefWidth="410.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </center>
-         <left>
-            <VBox alignment="CENTER" onMouseClicked="#skip" prefHeight="700.0" prefWidth="451.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fx:id="logo" fitHeight="381.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-                     <image>
-                        <Image url="@../image/LOGO.png" />
-                     </image>
-                  </ImageView>
-               </children></VBox>
-         </left>
-         <right>
-            <VBox alignment="CENTER" onMouseClicked="#skip" prefHeight="700.0" prefWidth="354.0" BorderPane.alignment="CENTER">
-               <children>
-                  <TextField fx:id="nameLogin" onKeyPressed="#inputName" prefHeight="26.0" prefWidth="261.0" promptText="Nhập tên tại đây" style="-fx-background-radius: 60;" />
-                  <Region prefHeight="50.0" prefWidth="308.0" />
-                  <JFXButton fx:id="loginButton" buttonType="RAISED" onMouseClicked="#nameLogin" prefHeight="30.0" prefWidth="244.0" style="-fx-background-radius: 60;" styleClass="backgroundColor" stylesheets="@styles.css" text="Login" />
-               </children></VBox>
-         </right>
       </BorderPane>
-      <JFXButton fx:id="nextLogin" buttonType="RAISED" layoutX="754.0" layoutY="1.0" onMouseClicked="#skip" prefHeight="26.0" prefWidth="50.0" styleClass="backgroundColor" stylesheets="@styles.css" text="Skip" />
    </children>
 </AnchorPane>
