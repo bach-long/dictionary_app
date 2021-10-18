@@ -9,3 +9,31 @@
      -fx-background-color: #FFFFFF;
      -fx-background-radius: 60;
 }
+.jfx-hamburger-icon{
+    -fx-spacing: 5;
+    -fx-cursor: hand;
+}
+.jfx-hamburger-icon StackPane{
+    -fx-pref-width: 40px;
+    -fx-pref-height: 7px;
+    -fx-background-color : #D63333;
+    -fx-background-radius : 5px;
+}
+
+.menuItem:hover{
+    -fx-border-color: #36D9E8 ;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+.buttonSearch:hover{
+    -fx-background-color: #36D9E8;
+}
+
+.buttonRadius{
+-fx-background-radius: 30;
+}
+
+.sidebarItem:hover{
+    -fx-background-color: #36D9E8;
+    -fx-border-color: WHITE;
+    -fx-border-width: 0px 0px 3px 0px;
+}

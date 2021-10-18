@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class transController implements Initializable {
@@ -44,6 +45,15 @@ public class transController implements Initializable {
         engine = prg_view.getEngine();
         String s = translator.translate("en", "vi", text);
         engine.loadContent(s);
+    }
+
+    public void audioAction (ActionEvent event) throws SQLException {
+        try {
+            TextToSpeech speech = new TextToSpeech();
+            speech.toSpeech(input_prg.getText());
+        } catch(Exception e) {
+            engine.loadContent("<h1>This word doesn't exist</h1>");
+        }
     }
 
     @Override

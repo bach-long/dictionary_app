@@ -11,74 +11,101 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane onMouseClicked="#prevhController" prefHeight="700.0" prefWidth="800.0" styleClass="backgroundColor2" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.transController">
+<AnchorPane prefHeight="700.0" prefWidth="800.0" styleClass="backgroundColor2" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.transController">
    <children>
       <BorderPane layoutX="234.0" layoutY="185.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <HBox prefHeight="174.0" prefWidth="800.0" stylesheets="@styles.css" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXButton fx:id="prev" buttonType="RAISED" onMouseClicked="#prevhController">
-                     <graphic>
-                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/left.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </HBox>
-         </top>
          <bottom>
             <HBox prefHeight="98.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
          </bottom>
          <center>
-            <VBox prefHeight="427.0" prefWidth="412.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <HBox prefHeight="42.0" prefWidth="800.0">
+                  <VBox prefHeight="100.0" prefWidth="388.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label alignment="CENTER" prefHeight="32.0" prefWidth="146.0" style="-fx-background-radius: 10;" styleClass="backgroundColor" stylesheets="@styles.css" text="paragraph">
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin></Label>
-                        <Region prefHeight="38.0" prefWidth="253.0" HBox.hgrow="ALWAYS" />
+                        <HBox prefHeight="42.0" prefWidth="800.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="32.0" prefWidth="146.0" style="-fx-background-radius: 10;" styleClass="backgroundColor" stylesheets="@styles.css" text="paragraph">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <JFXButton onAction="#audioAction" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/loa.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Region prefHeight="38.0" prefWidth="253.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="input_prg" prefHeight="385.0" prefWidth="343.0" promptText="Nhập văn bản cần dịch " VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="20.0" right="40.0" />
+                           </VBox.margin>
+                        </TextArea>
                      </children>
-                  </HBox>
-                  <TextArea fx:id="input_prg" prefHeight="310.0" prefWidth="590.0" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets left="20.0" right="80.0" />
-                     </VBox.margin>
-                  </TextArea>
-               </children>
-            </VBox>
-         </center>
-         <right>
-            <VBox prefHeight="427.0" prefWidth="367.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox prefHeight="37.0" prefWidth="367.0">
+                  </VBox>
+                  <VBox prefHeight="427.0" prefWidth="367.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <JFXButton fx:id="prg" buttonType="RAISED" onAction="#trans_prg" styleClass="backgroundColor" stylesheets="@styles.css">
+                        <HBox prefHeight="37.0" prefWidth="367.0">
+                           <children>
+                              <JFXButton fx:id="prg" buttonType="RAISED" onAction="#trans_prg" styleClass="backgroundColor" stylesheets="@styles.css">
+                                 <graphic>
+                                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/search.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
+                        <WebView fx:id="prg_view" minHeight="-1.0" minWidth="-1.0" prefHeight="401.0" prefWidth="367.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </WebView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+         <top>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="38.0" prefWidth="800.0" stylesheets="@styles.css">
+                     <children>
+                        <JFXButton fx:id="prev" buttonType="RAISED" onMouseClicked="#prevhController">
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../image/search.png" />
+                                    <Image url="@../image/home.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
-                  <WebView fx:id="prg_view" minHeight="-1.0" minWidth="-1.0" prefHeight="382.0" prefWidth="380.0" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets right="20.0" top="10.0" />
-                     </VBox.margin>
-                  </WebView>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anh - Việt" wrappingWidth="205.49522399902344">
+                           <font>
+                              <Font name="Cambria" size="46.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
-         </right>
+         </top>
       </BorderPane>
    </children>
 </AnchorPane>
