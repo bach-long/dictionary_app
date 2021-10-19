@@ -93,8 +93,6 @@ public class database_manage {
         mean = mean.replace("\n","<br>");
         word = word.trim();
         mean = mean.trim();
-        word = word.replaceAll("\\s+"," ");
-        mean = mean.replaceAll("\\s+"," ");
         mean = mean + "<br>";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -138,6 +136,36 @@ public class database_manage {
         }
     }
 
+    /**Xoa comment cua word trong table_name
+     * table_name co the la av hoac va.*/
+    public static void delete_comment(String word, String table_name) throws SQLException {
+        pstsm = c.prepareStatement(String.format("UPDATE %s SET comment = NULL WHERE word = ?", table_name));
+        pstsm.setString(1,word.toLowerCase());
+        pstsm.executeUpdate();
+        if (pstsm == null){}
+        else {
+            pstsm.close();
+        }
+    }
+
+    /**tra lai string comment cua word trong table_name, table_name la av hoac va
+     * dua no vao mot textarea de nguoi dung thay va chinh sua
+     * sau khi chinh sua, su dung ham comment de cap nhat lai comment moi.
+     */
+    public static String comment_change(String word, String table_name) throws SQLException {
+        rs = stmt.executeQuery(String.format("select * from %s where word = '%s'",table_name, word.toLowerCase()));
+        rs.next();
+        String result = "";
+        result = rs.getString("comment");
+        result = result.replace("<h4>","");
+        result = result.replace("</h4>","");
+        result = result.replace("<br>","\n");
+        if(rs == null) {}
+        else
+            rs.close();
+        return result;
+    }
+
     /** nguoi dung chinh sua (chi doi voi table add).*/
     public static void make_change (String word, String mean) throws SQLException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -146,12 +174,10 @@ public class database_manage {
         mean = mean.replace("\n","<br>");
         word = word.trim();
         mean = mean.trim();
-        word = word.replaceAll("\\s+"," ");
-        mean = mean.replaceAll("\\s+"," ");
         pstsm = c.prepareStatement("UPDATE user SET DEFINITION = ?, time = ? WHERE word = ?");
         pstsm.setString(1,mean.toLowerCase());
         pstsm.setString(2, sdf.format(timestamp));
-        pstsm.setString(3,word.toLowerCase(Locale.ROOT));
+        pstsm.setString(3,word.toLowerCase());
         pstsm.executeUpdate();
         if (pstsm == null){}
         else {
