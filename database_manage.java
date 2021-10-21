@@ -15,6 +15,23 @@ public class database_manage {
     static Statement stmt = null;
     static ResultSet rs = null;
     static PreparedStatement pstsm = null;
+    public static ArrayList<String> temporal_user;
+    public static ArrayList<String> table_list;
+
+    static {
+        try {
+            table_list = temporal_list("name");
+            temporal_user = temporal_list("user");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static public ArrayList<String> temporal_list(String table) throws SQLException {
+        set_database();
+        ArrayList<String> result = get_list(table);
+        return result;
+    }
 
     /** khoi tao. */
     public static void set_database() {
@@ -87,24 +104,67 @@ public class database_manage {
         return result;
     }
 
-    /** nguoi dung them vao , table_name la table dc them.*/
-    public static void user_add (String word, String mean) throws SQLException {
+    /** nguoi dung them vao table user
+     * neu da co tu do thi false
+     * nguoc lai thi them vao va return true
+     * da co them 1 thuoc tinh la temporal_user chua
+     * cac tu trong user o tren.*/
+    public static boolean user_add (String word, String mean) throws SQLException {
+        word = word.replace("\n","<br>");
+        word = word.trim();
+        word = word.toLowerCase();
+        if (temporal_user.contains(word)) {
+            //System.out.print("deo add dc");
+            return false;
+        } else {
+            mean = mean.replace("\n","<br>");
+            mean = mean.trim();
+            mean = mean + "<br>";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            pstsm = c.prepareStatement("INSERT INTO USER (word, definition, time) VALUES (?,?,?)");
+            pstsm.setString(1, word);
+            pstsm.setString(2, mean.toLowerCase());
+            pstsm.setString(3, sdf.format(timestamp));
+            pstsm.executeUpdate();
+            if (pstsm == null) {
+            } else {
+                pstsm.close();
+            }
+            return true;
+        }
+    }
+
+    /** nguoi dung chinh sua (chi doi voi table user)
+     * mean la y nghia cua tu do, sau khi
+     * nguoi dung da chinh sua .*/
+    public static void make_change (String word, String mean) throws SQLException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         word = word.replace("\n","<br>");
         mean = mean.replace("\n","<br>");
         word = word.trim();
         mean = mean.trim();
-        mean = mean + "<br>";
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        pstsm = c.prepareStatement("INSERT INTO USER (word, definition, time) VALUES (?,?,?)");
-        pstsm.setString(1,word.toLowerCase());
-        pstsm.setString(2,mean.toLowerCase());
-        pstsm.setString(3,sdf.format(timestamp));
+        pstsm = c.prepareStatement("UPDATE user SET DEFINITION = ?, time = ? WHERE word = ?");
+        pstsm.setString(1,mean.toLowerCase());
+        pstsm.setString(2, sdf.format(timestamp));
+        pstsm.setString(3,word.toLowerCase());
         pstsm.executeUpdate();
         if (pstsm == null){}
         else {
             pstsm.close();
         }
+    }
+
+    /** tra ve y nghia cho nguoi dung chinh sua
+     * tham so la tu do.*/
+    public static String user_meaning(String word) throws SQLException {
+        rs = stmt.executeQuery(String.format("select * from user where word = '%s'",word));
+        rs.next();
+        String result = "";
+        result = rs.getString("definition");
+        result = result.replace("<br>","\n");
+        return result;
     }
 
     /**add word vao trong mot memo da duoc tao*/
@@ -166,25 +226,6 @@ public class database_manage {
         return result;
     }
 
-    /** nguoi dung chinh sua (chi doi voi table add).*/
-    public static void make_change (String word, String mean) throws SQLException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        word = word.replace("\n","<br>");
-        mean = mean.replace("\n","<br>");
-        word = word.trim();
-        mean = mean.trim();
-        pstsm = c.prepareStatement("UPDATE user SET DEFINITION = ?, time = ? WHERE word = ?");
-        pstsm.setString(1,mean.toLowerCase());
-        pstsm.setString(2, sdf.format(timestamp));
-        pstsm.setString(3,word.toLowerCase());
-        pstsm.executeUpdate();
-        if (pstsm == null){}
-        else {
-            pstsm.close();
-        }
-    }
-
     /** xoa trong cac table memo cua user (ko cho phep xoa add , av, va) */
     public static void user_delete (String word, String table_name) throws SQLException {
         pstsm = c.prepareStatement(String.format("DELETE FROM %s WHERE word = ?", table_name));
@@ -222,9 +263,8 @@ public class database_manage {
      * tra ve false neu nhom da ton tai
      * them nhom va tra ve true trong TH nguoc lai.*/
     public static boolean add_group(String s) throws SQLException {
-        ArrayList<String> a = get_list("name");
         s = s.replaceAll("\\s+","_");
-        if(a.contains(s)) {
+        if(table_list.contains(s)) {
             return false;
         }
         else {
