@@ -73,7 +73,9 @@ public class ListGroupOut implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        listGroup.getItems().addAll(arrayGroup);
+        for (int i = 4; i < arrayGroup.size(); i++) {
+            listGroup.getItems().add(arrayGroup.get(i));
+        }
         acpt.setOnMouseClicked(MouseEvent ->{
             String s = nameGroup.getText();
             try {

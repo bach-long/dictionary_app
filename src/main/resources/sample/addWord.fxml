@@ -74,5 +74,14 @@
                </image>
             </ImageView>
          </graphic></JFXButton>
+      <JFXButton layoutX="748.0" layoutY="1.0" onAction="#openListAdd" text=" ">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/list.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

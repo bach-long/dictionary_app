@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ListGroup implements Initializable {
-    public List<String> arrayGroup = null;
+    public List<String> arrayGroup = new ArrayList<>();
+
     @FXML
     private JFXButton prev;
 
@@ -69,7 +70,10 @@ public class ListGroup implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        listGroup.getItems().addAll(arrayGroup);
+        for (int i = 4; i < arrayGroup.size(); i++) {
+            listGroup.getItems().add(arrayGroup.get(i));
+        }
+        //listGroup.getItems().addAll(arrayGroup);
         acpt.setOnMouseClicked(MouseEvent ->{
             String s = nameGroup.getText();
             try {

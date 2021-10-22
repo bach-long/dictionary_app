@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 public class FlashCard implements Initializable {
     private List<String> listWord = new ArrayList<>();
-    int show = 1;
+    int show = 0;
     boolean check = true;
     @FXML
     private AnchorPane page1;
@@ -124,7 +124,8 @@ public class FlashCard implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        word1.setText(listWord.get(show));
         translateAnimation(0.1,page2,-800);
-        translateAnimation(0.1,page1,-800);
+        //translateAnimation(0.1,page1,-800);
     }
 }

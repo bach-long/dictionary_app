@@ -2,6 +2,7 @@ package sample;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,6 +33,12 @@ public class AddWord implements Initializable {
     @FXML
     private TextArea meanAddIn;
 
+    @FXML
+    void openListAdd(ActionEvent event) throws IOException {
+        Stage stage = (Stage)prev.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("listAdd.fxml"));
+        stage.setScene(new Scene(root));
+    }
 
     @FXML
     void prevController(MouseEvent event) throws IOException {
@@ -50,7 +57,7 @@ public class AddWord implements Initializable {
         meanAddIn.setText("");
         wordAddIn.setText("");
         Stage stage = (Stage)prev.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("listAdd.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
