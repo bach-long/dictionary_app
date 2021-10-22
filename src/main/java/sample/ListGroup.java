@@ -19,10 +19,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ListGroup implements Initializable {
-    public String group;
+    public List<String> arrayGroup = null;
     @FXML
     private JFXButton prev;
 
@@ -52,6 +55,7 @@ public class ListGroup implements Initializable {
         dialog.show();
     }
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dialog.setTransitionType(JFXDialog.DialogTransition.TOP);
@@ -60,20 +64,36 @@ public class ListGroup implements Initializable {
             dialog.close();
         });
 
+        try {
+            arrayGroup = database_manage.get_list("name");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        listGroup.getItems().addAll(arrayGroup);
         acpt.setOnMouseClicked(MouseEvent ->{
             String s = nameGroup.getText();
+            try {
+                database_manage.add_group(s);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             listGroup.getItems().add(s);
             dialog.close();
         });
 
+
         listGroup.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> obj, String oldVal, String newVal) {
-                group = newVal;
+                try {
+                    database_manage.add_memo(HelloController.wordMemoAdd, newVal);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 Stage stage = (Stage)prev.getScene().getWindow();
                 Parent root = null;
                 try {
-                    root = FXMLLoader.load(getClass().getResource("listMemoView.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

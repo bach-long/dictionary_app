@@ -1,20 +1,38 @@
 package sample;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+
+/**Điều chỉnh lại hàm delete
+ * thêm hàm add memo
+ */
+
+import java.sql.*;
 import java.lang.String;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.sql.Timestamp;
 
 public class database_manage {
     static Connection c = null;
     static Statement stmt = null;
     static ResultSet rs = null;
     static PreparedStatement pstsm = null;
+
+    public static ArrayList<String> temporal_user;
+    public static ArrayList<String> table_list;
+
+    static {
+        try {
+            table_list = temporal_list("name");
+            temporal_user = temporal_list("user");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static public ArrayList<String> temporal_list(String table) throws SQLException {
+        set_database();
+        ArrayList<String> result = get_list(table);
+        return result;
+    }
 
     /** khoi tao. */
     public static void set_database() {
@@ -42,24 +60,31 @@ public class database_manage {
         c.close();
     }
 
-    /** tim kiem trong database goc. */
-    public static String search(String r) throws SQLException{
+    /** tim kiem trong database goc, table name la av hoac va, tra ve [0] la nghia va [1] la comment. */
+    public static String[] search(String r, String table_name) throws SQLException{
+        String[] result = new String[2];
         r = r.trim();
         r = r.replaceAll("\\s+","");
-        String s="";
-        rs = stmt.executeQuery(String.format("select * from av where word = '%s'", r.toLowerCase()));
+        result[0] = "";
+        result[1] = "";
+        rs = stmt.executeQuery(String.format("select * from %s where word = '%s'",table_name, r.toLowerCase()));
+        int i = 0;
         while (rs.next()) {
+            if(i == 0) {
+                result[1] = result[1] + rs.getString("comment");
+            }
             String drc = rs.getString("html");
-            s = s + drc + "\n";
+            result[0] = result[0] + drc + "\n";
+            i++;
         }
-        if(s == ""){
+        if(result[0] == ""){
             rs.close();
-            return "<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>";
+            result[0] = "<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>";
         }
         if(rs == null) {}
         else
             rs.close();
-        return s;
+        return result;
 
     }
 
@@ -80,7 +105,7 @@ public class database_manage {
         return result;
     }
 
-    /** nguoi dung them vao.*/
+    /** nguoi dung them vao , table_name la table dc them.*/
     public static void user_add (String word, String mean) throws SQLException {
         word = word.replace("\n","<br>");
         mean = mean.replace("\n","<br>");
@@ -88,9 +113,10 @@ public class database_manage {
         mean = mean.trim();
         word = word.replaceAll("\\s+"," ");
         mean = mean.replaceAll("\\s+"," ");
+        mean = mean + "<br>";
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        pstsm = c.prepareStatement("INSERT INTO user (word, definition, time) VALUES (?,?,?)");
+        pstsm = c.prepareStatement("INSERT INTO USER (word, definition, time) VALUES (?,?,?)");
         pstsm.setString(1,word.toLowerCase());
         pstsm.setString(2,mean.toLowerCase());
         pstsm.setString(3,sdf.format(timestamp));
@@ -101,7 +127,36 @@ public class database_manage {
         }
     }
 
-    /** nguoi dung chinh sua.*/
+    /**add word vao trong mot memo da duoc tao*/
+    public static void add_memo (String word, String memo) throws SQLException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        pstsm = c.prepareStatement(String.format("INSERT INTO %s (word, time) VALUES (?,?)",memo));
+        pstsm.setString(1,word.toLowerCase());
+        pstsm.setString(2,sdf.format(timestamp));
+        pstsm.executeUpdate();
+        if (pstsm == null){}
+        else {
+            pstsm.close();
+        }
+    }
+
+    /**comment to origin table
+     * co the la av hoac va. */
+    public static void comment(String s, String word, String table_name) throws SQLException {
+        s = s.replace("\n","<br>");
+        s = "<h4>" +s + "</h4>" + "<br>";
+        pstsm = c.prepareStatement(String.format("UPDATE %s SET COMMENT = ? WHERE word = ?",table_name));
+        pstsm.setString(1,s);
+        pstsm.setString(2,word);
+        pstsm.executeUpdate();
+        if (pstsm == null){}
+        else {
+            pstsm.close();
+        }
+    }
+
+    /** nguoi dung chinh sua (chi doi voi table add).*/
     public static void make_change (String word, String mean) throws SQLException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -122,21 +177,21 @@ public class database_manage {
         }
     }
 
-    /** xoa. */
-    public static void user_delete (String word) throws SQLException {
-        pstsm = c.prepareStatement("DELETE FROM user WHERE word = ?");
-        word = word.replace("\n","<br>");
+    /** xoa trong cac table memo cua user (ko cho phep xoa add , av, va) */
+    public static void user_delete (String word, String table_name) throws SQLException {
+        pstsm = c.prepareStatement(String.format("DELETE FROM %s WHERE word = ?", table_name));
+        word = word.replace("\n", "<br>");
         word = word.trim();
-        word = word.replaceAll("\\s+"," ");
-        pstsm.setString(1,word);
+        word = word.replaceAll("\\s+", " ");
+        pstsm.setString(1, word);
         pstsm.executeUpdate();
-        if (pstsm == null){}
-        else {
+        if (pstsm == null) {
+        } else {
             pstsm.close();
         }
     }
 
-    /**tim kiem trong database cua nguoi dung.*/
+    /**tim kiem trong table add.*/
     public static String user_search(String r) throws SQLException {
         String s="";
         r = r.trim();
@@ -152,6 +207,57 @@ public class database_manage {
         if(rs == null) {}
         else
             rs.close();
-        return "<h2>" + s + "</h2>";
+        return "<h4>" + s + "</h4>";
+    }
+
+    /** nhan tham so la ten table va can co mot list_name de truyen
+     * tra ve false neu nhom da ton tai
+     * them nhom va tra ve true trong TH nguoc lai.*/
+    public static boolean add_group(String s) throws SQLException {
+        ArrayList<String> a = get_list("name");
+        s = s.replaceAll("\\s+","_");
+        if(a.contains(s)) {
+            return false;
+        }
+        else {
+            pstsm = c.prepareStatement("CREATE TABLE " + s + " (" +
+                    "   word           TEXT," +
+                    "   time           TEXT" +
+                    ");");
+            pstsm.executeUpdate();
+            pstsm = c.prepareStatement("Insert into name (word) values (?)");
+            pstsm.setString(1,s);
+            pstsm.executeUpdate();
+            if (pstsm == null) {
+            } else {
+                pstsm.close();
+            }
+            return true;
+        }
+    }
+
+    public static void delete_table(String table_name) throws SQLException {
+        table_name = table_name.replaceAll("\\s+","_");
+        pstsm = c.prepareStatement(String.format("Drop table %s", table_name));
+        pstsm.executeUpdate();
+        pstsm = c.prepareStatement("Delete from name where word = ?");
+        pstsm.setString(1,table_name);
+        pstsm.executeUpdate();
+        if(pstsm == null) {
+        } else {
+            pstsm.close();
+        }
+    }
+
+
+    /**tra ve mot arrayList cac word o mot table duoc chon. */
+    public static ArrayList<String> get_list(String table_name) throws SQLException {
+        rs = stmt.executeQuery(String.format("select * from %s",table_name));
+        ArrayList<String> s = new ArrayList<>();
+        while(rs.next()) {
+            s.add(rs.getString("word"));
+        }
+        rs.close();
+        return s;
     }
 }

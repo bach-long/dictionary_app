@@ -1,9 +1,9 @@
 .backgroundColor{
-    -fx-background-color: linear-gradient(to right bottom,#FF6767, #E839F6);
+    -fx-background-color: linear-gradient(to left bottom, #5DADE2,#E74C3C);
 }
 
 .backgroundColor2{
-    -fx-background-color: linear-gradient(to left bottom, #E839F6,#61D8DE);
+    -fx-background-color: linear-gradient(to left bottom, #5DADE2,#E74C3C);
 }
 .textBoxSearch{
      -fx-background-color: #FFFFFF;
@@ -22,7 +22,7 @@
 
 .menuItem:hover{
     -fx-border-color: #36D9E8 ;
-    -fx-border-width: 0px 0px 3px 0px;
+    -fx-border-width: 0px 0px 2px 0px;
 }
 .buttonSearch:hover{
     -fx-background-color: #36D9E8;

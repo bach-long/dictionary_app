@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListGroupOut">
+    <children>
+        <BorderPane layoutX="235.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor2" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+            <top>
+                <VBox prefHeight="62.0" prefWidth="775.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox prefHeight="30.0" prefWidth="800.0">
+                            <children>
+                                <JFXButton fx:id="prev" text=" ">
+                                    <graphic>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../image/home.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                <JFXButton fx:id="addGroup" layoutX="10.0" layoutY="10.0" onMouseClicked="#addGroup" text=" ">
+                                    <graphic>
+                                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../image/addList.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </JFXButton>
+                            </children>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </HBox>
+                    </children>
+                </VBox>
+            </top>
+            <bottom>
+                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            </bottom>
+            <center>
+                <StackPane fx:id="root" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <ListView fx:id="listGroup" prefHeight="416.0" prefWidth="800.0" />
+                        <JFXDialog fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="211.0" prefWidth="494.0" style="-fx-background-radius: 20;" styleClass="backgroundColor" stylesheets="@styles.css" transitionType="TOP">
+                            <children>
+                                <VBox alignment="CENTER" prefHeight="445.0" prefWidth="712.0">
+                                    <children>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TẠO NHÓM TỪ ">
+                                            <font>
+                                                <Font name="Cambria" size="20.0" />
+                                            </font>
+                                        </Text>
+                                        <HBox alignment="CENTER" prefHeight="56.0" prefWidth="494.0">
+                                            <children>
+                                                <TextArea fx:id="nameGroup" prefHeight="56.0" prefWidth="318.0" promptText="Nhập tên nhóm tại đây" />
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER" prefHeight="65.0" prefWidth="494.0">
+                                            <children>
+                                                <JFXButton fx:id="acpt" prefHeight="26.0" prefWidth="88.0" style="-fx-background-color: #9BFFFE;" stylesheets="@styles.css" text="Tao">
+                                                    <HBox.margin>
+                                                        <Insets />
+                                                    </HBox.margin>
+                                                </JFXButton>
+                                                <JFXButton fx:id="dec" prefHeight="28.0" prefWidth="114.0" style="-fx-background-color: #C3C7C7;" stylesheets="@styles.css" text="Huy">
+                                                    <HBox.margin>
+                                                        <Insets left="20.0" />
+                                                    </HBox.margin>
+                                                </JFXButton>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                            <effect>
+                                <Glow />
+                            </effect>
+                        </JFXDialog>
+                    </children>
+                </StackPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

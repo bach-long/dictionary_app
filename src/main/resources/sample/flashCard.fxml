@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" styleClass="backgroundColor2" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FlashCard">
+   <children>
+      <ImageView fitHeight="606.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.66668701171875" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+         <image>
+            <Image url="@../image/hatake.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="page1" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-opacity: 0.6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <TextArea fx:id="mean1" layoutX="192.0" layoutY="257.0" prefHeight="162.0" prefWidth="464.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="word1" layoutX="192.0" layoutY="101.0" prefHeight="66.0" prefWidth="464.0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="page2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-opacity: 0.6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <TextArea fx:id="word2" layoutX="190.0" layoutY="103.0" prefHeight="66.0" prefWidth="464.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="mean2" layoutX="192.0" layoutY="257.0" prefHeight="162.0" prefWidth="464.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextArea>
+         </children>
+      </AnchorPane>
+      <Pane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="583.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="prev" onAction="#prev" text=" ">
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/left.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+      <JFXButton onAction="#next" prefHeight="118.0" prefWidth="34.0" style="-fx-background-color: #45D6FF;" text="&gt;" AnchorPane.leftAnchor="768.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0" />
+      <JFXButton onAction="#later" prefHeight="118.0" prefWidth="34.0" style="-fx-background-color: #45D6FF;" text="&lt;" AnchorPane.topAnchor="250.0" />
+   </children>
+</AnchorPane>

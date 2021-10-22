@@ -4,16 +4,16 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
-import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -29,9 +29,9 @@ import java.net.URI;
 import java.sql.SQLException;
 import java.util.*;
 
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -41,9 +41,13 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 public class HelloController implements Initializable {
-    public String namePerson = "Person";
-    String globe = "";
+    private static String namePerson = "Person";
+    public static String wordMemoAdd;
+    public  boolean an = false;
+    public static String nameTable = "av";
+
     public static String[] listWord = null;
+    public static String[] lang = {"Anh-Viet", "Viet-Anh"};
 
     public static void getListWord() throws SQLException {
         listWord = database_manage.list_word();
@@ -55,56 +59,34 @@ public class HelloController implements Initializable {
     Set<String> psWord = new HashSet<>();
 
     @FXML
+    private ChoiceBox<String> choiceBox;
+
+    @FXML
     public Button bt;
 
     @FXML
-    private Label name;
+    private Label name, wordIn;
 
     @FXML
-    private Label wordIn;
-
-    @FXML
-    public AnchorPane anchor;
-
-    @FXML
-    private AnchorPane slider;
-
-    @FXML
-    private AnchorPane web;
+    public AnchorPane anchor, slider, web;
 
     @FXML
     private JFXHamburger h1;
 
     @FXML
-    private JFXButton acpt;
-
-    @FXML
-    private JFXButton dec;
+    private JFXButton dec, acpt, login, next, memo, ListMemo, searchOnline, send;
 
     @FXML
     private JFXDialog dialogLogin;
 
     @FXML
-    private JFXButton login;
-
-    @FXML
     public WebView html_view;
 
     @FXML
-    private JFXButton next;
+    private VBox bottomBox;
 
     @FXML
-    private JFXButton memo;
-
-    @FXML
-    private JFXButton ListMemo;
-
-    @FXML
-    private TextField inName;
-
-    @FXML
-    private JFXButton searchOnline;
-
+    private TextField inName, boxComment;
 
     @FXML
     private StackPane root;
@@ -115,6 +97,14 @@ public class HelloController implements Initializable {
     void gopY(ActionEvent event) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://www.facebook.com/anh.tranthe.98622"));
     }
+
+    @FXML
+    void acpt(MouseEvent event) {
+        namePerson = inName.getText();
+        name.setText(namePerson);
+        dialogLogin.close();
+    }
+
 
     @FXML
     void searchOnGG(ActionEvent event) throws URISyntaxException, IOException {
@@ -138,19 +128,29 @@ public class HelloController implements Initializable {
 
     public void submit(ActionEvent event) throws SQLException {
         String input = tfinput.getText();
+        wordMemoAdd = input;
         engine = html_view.getEngine();
         wordIn.setText(input);
         try {
-            String s = database_manage.search(input);
-            if(s == "<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>") {
-                s = database_manage.user_search(input);
+            an = true;
+            bottomBox.setVisible(true);
+            memo.setVisible(true);
+            String[] s = database_manage.search(input,nameTable);
+            if (s[1] == null) {
+                s[1] = "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
             }
-            engine.loadContent(s);
+            String v = s[0] + "\n Góp ý " + s[1];
+            if(s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
+                s[0] = database_manage.user_search(input);
+                v = s[0] + "\n Góp ý" + "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
+            }
+            engine.loadContent(v);
         } catch(Exception e) {
             engine.loadContent("<h1>This word doesn't exist</h1>");
         }
     }
 
+    /**doc*/
     public void audioAction (ActionEvent event) throws SQLException {
         try {
             TextToSpeech speech = new TextToSpeech();
@@ -160,6 +160,7 @@ public class HelloController implements Initializable {
         }
     }
 
+    /**buttonMemoAdd.*/
     @FXML
     void memo(MouseEvent event) throws IOException {
         Stage stage = (Stage)memo.getScene().getWindow();
@@ -167,31 +168,55 @@ public class HelloController implements Initializable {
         stage.setScene(new Scene(root));
     }
 
+    /**ViewMemoAdd.*/
     @FXML
     void openList(MouseEvent event) throws IOException {
         Stage stage = (Stage)ListMemo.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("listGroup.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("listGroupOut.fxml"));
         stage.setScene(new Scene(root));
+    }
+
+    @FXML
+    void sendComment(ActionEvent event) {
+            String c = namePerson + ": "+boxComment.getText() + "\n";
+            try {
+                database_manage.comment(c,tfinput.getText(),nameTable);
+                submit(event);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle rsc) {
+        bottomBox.setVisible(an);
+        memo.setVisible(an);
+
+        /**chon ngon ngu.*/
+        choiceBox.getItems().addAll(lang);
+        choiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                String language = t1;
+                if (language == "Viet-Anh") {
+                    nameTable = "va";
+                } else {
+                    nameTable = "av";
+                }
+            }
+        });
+
+        /**Login.*/
         dialogLogin.setTransitionType(JFXDialog.DialogTransition.BOTTOM);
         dialogLogin.setDialogContainer(root);
         dec.setOnMouseClicked(MouseEvent ->{
             dialogLogin.close();
         });
 
-        acpt.setOnMouseClicked(MouseEvent ->{
-            namePerson = inName.getText();
-            dialogLogin.close();
-        });
         login.setOnMouseClicked(MouseEvent->{
             dialogLogin.show();
         });
-
-        name.setText(namePerson);
 
         try {
             getListWord();
@@ -199,6 +224,7 @@ public class HelloController implements Initializable {
             e.printStackTrace();
         }
 
+        /**Hoan tu dong, goi y.*/
         Collections.addAll(psWord, listWord);
         autoCompletionBinding = TextFields.bindAutoCompletion(tfinput,psWord);
         tfinput.setOnKeyPressed((KeyEvent e) -> {
@@ -206,14 +232,23 @@ public class HelloController implements Initializable {
                 case ENTER:
                     learnWord(tfinput.getText());
                     String input = tfinput.getText();
+                    wordMemoAdd = input;
                     engine = html_view.getEngine();
                     wordIn.setText(input);
                     try {
-                        String s = database_manage.search(input);
-                        if(s == "<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>") {
-                            s = database_manage.user_search(input);
+                        an = true;
+                        bottomBox.setVisible(true);
+                        memo.setVisible(true);
+                        String[] s = database_manage.search(input,nameTable);
+                        if (s[1] == null) {
+                            s[1] = "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
                         }
-                        engine.loadContent(s);
+                        String v = s[0] + "\n Góp ý " + s[1];
+                        if(s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
+                            s[0] = database_manage.user_search(input);
+                            v = s[0] + "\n Góp ý" + "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
+                        }
+                        engine.loadContent(v);
                     } catch(Exception e1) {
                         engine.loadContent("<h1>This word doesn't exist</h1>");
                     }
@@ -223,6 +258,7 @@ public class HelloController implements Initializable {
             }
         });
 
+        /**them cua so.*/
         HamburgerNextArrowBasicTransition burgerTask = new HamburgerNextArrowBasicTransition(h1);
         burgerTask.setRate(-1);
         double leng = slider.getHeight();
@@ -270,6 +306,7 @@ public class HelloController implements Initializable {
 
     }
 
+    /**hoc tu.*/
     private void learnWord(String text) {
         psWord.add(text);
         if(autoCompletionBinding != null){

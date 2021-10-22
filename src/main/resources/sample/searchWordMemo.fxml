@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane fx:id="anchor" prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchWordMemo">
+    <children>
+        <BorderPane prefHeight="402.0" prefWidth="640.0" styleClass="backgroundColor" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <AnchorPane fx:id="web" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox prefHeight="275.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="800.0">
+                                    <children>
+                                        <Label fx:id="wordIn" alignment="CENTER" prefHeight="48.0" prefWidth="162.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 5;" stylesheets="@styles.css" text="ENGLISH" textFill="#ec0000">
+                                            <HBox.margin>
+                                                <Insets bottom="7.0" left="20.0" right="7.0" top="7.0" />
+                                            </HBox.margin>
+                                            <font>
+                                                <Font name="Cambria" size="15.0" />
+                                            </font>
+                                        </Label>
+                                        <JFXButton onAction="#audioAction" prefHeight="35.0" prefWidth="34.0" ripplerFill="#ffc300" styleClass="menuItem" stylesheets="@styles.css" textFill="TRANSPARENT">
+                                            <graphic>
+                                                <ImageView fitHeight="27.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" styleClass="buttonSearch">
+                                                    <image>
+                                                        <Image url="@../image/loa.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </JFXButton>
+                              <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <JFXButton onAction="#remove" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/remove.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets bottom="5.0" left="20.0" />
+                                    </VBox.margin>
+                                </HBox>
+                                <StackPane fx:id="root" alignment="TOP_CENTER" prefHeight="394.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                                    <children>
+                              <JFXDialog fx:id="dialog" cacheContainer="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="486.0" style="-fx-background-radius: 10;" styleClass="backgroundColor2" stylesheets="@styles.css">
+                                 <StackPane.margin>
+                                    <Insets top="40.0" />
+                                 </StackPane.margin>
+                                 <children>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="137.0" prefWidth="422.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 60;">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="75.0" prefWidth="454.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="bạn có muốn xóa từ này?">
+                                                   <font>
+                                                      <Font name="Cambria Bold" size="24.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="102.0" prefWidth="454.0">
+                                             <children>
+                                                <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#acpt" prefHeight="32.0" prefWidth="80.0" styleClass="backgroundColor2" stylesheets="@styles.css" text="Có " textAlignment="CENTER">
+                                                   <HBox.margin>
+                                                      <Insets right="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="Cambria Bold" size="12.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <JFXButton layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#dec" prefHeight="32.0" prefWidth="80.0" styleClass="backgroundColor" stylesheets="@styles.css" text="Không " textAlignment="CENTER">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font name="Cambria Bold" size="12.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </JFXDialog>
+                                        <WebView fx:id="html_view" minHeight="-1.0" minWidth="-1.0" prefHeight="524.0" prefWidth="760.0" stylesheets="@styles.css">
+                                 <StackPane.margin>
+                                    <Insets bottom="20.0" left="20.0" />
+                                 </StackPane.margin></WebView>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets left="20.0" right="20.0" />
+                                    </VBox.margin>
+                                </StackPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </AnchorPane>
+            </center>
+         <top>
+            <HBox prefHeight="34.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="prev">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/left.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <JFXButton fx:id="later" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#later" prefHeight="80.0" prefWidth="34.0" styleClass="backgroundColor2" stylesheets="@styles.css" text="&lt;" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+         </left>
+         <right>
+            <JFXButton fx:id="next" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#next" prefHeight="80.0" prefWidth="34.0" styleClass="backgroundColor2" stylesheets="@styles.css" text="&gt;" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+         </right>
+         <bottom>
+            <HBox prefHeight="48.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+         </bottom>
+        </BorderPane>
+    </children>
+</AnchorPane>

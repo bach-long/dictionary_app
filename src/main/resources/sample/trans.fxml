@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -30,7 +31,7 @@
                            <children>
                               <Label alignment="CENTER" prefHeight="32.0" prefWidth="146.0" style="-fx-background-radius: 10;" styleClass="backgroundColor" stylesheets="@styles.css" text="paragraph">
                                  <HBox.margin>
-                                    <Insets left="20.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </Label>
                               <JFXButton onAction="#audioAction" text=" ">
@@ -42,14 +43,30 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Region prefHeight="38.0" prefWidth="253.0" HBox.hgrow="ALWAYS" />
+                              <Region prefHeight="34.0" prefWidth="230.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                         <TextArea fx:id="input_prg" prefHeight="385.0" prefWidth="343.0" promptText="Nhập văn bản cần dịch " VBox.vgrow="ALWAYS">
                            <VBox.margin>
-                              <Insets left="20.0" right="40.0" />
+                              <Insets />
                            </VBox.margin>
                         </TextArea>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="402.0" prefWidth="49.0">
+                     <children>
+                        <JFXButton text=" ">
+                           <graphic>
+                              <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/leftandright.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
                      </children>
                   </VBox>
                   <VBox prefHeight="427.0" prefWidth="367.0" HBox.hgrow="ALWAYS">
@@ -70,10 +87,13 @@
                         </HBox>
                         <WebView fx:id="prg_view" minHeight="-1.0" minWidth="-1.0" prefHeight="401.0" prefWidth="367.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
-                              <Insets right="10.0" top="10.0" />
+                              <Insets right="10.0" />
                            </VBox.margin>
                         </WebView>
                      </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </VBox>
                </children>
             </HBox>
@@ -96,11 +116,22 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Anh - Việt" wrappingWidth="205.49522399902344">
+                        <Region prefHeight="150.0" prefWidth="287.0" HBox.hgrow="ALWAYS" />
+                        <Text fx:id="text" strokeType="OUTSIDE" strokeWidth="0.0" text="ANH - VIỆT " wrappingWidth="239.73671460151672">
                            <font>
-                              <Font name="Cambria" size="46.0" />
+                              <Font name="Cambria Bold" size="44.0" />
                            </font>
                         </Text>
+                        <ChoiceBox fx:id="choiceBox" prefHeight="30.0" prefWidth="51.0" />
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/LOGO.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </ImageView>
                      </children>
                   </HBox>
                </children>
