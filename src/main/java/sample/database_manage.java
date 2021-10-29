@@ -87,8 +87,8 @@ public class database_manage {
     }
 
     /** list cac tu.*/
-    public static String[] list_word() throws SQLException {
-        rs = stmt.executeQuery("select * from av");
+    public static String[] list_word(String table_name) throws SQLException {
+        rs = stmt.executeQuery(String.format("select * from %s", table_name));
         Set<String> a = new LinkedHashSet<> ();
         while(rs.next()) {
             a.add(rs.getString("word"));

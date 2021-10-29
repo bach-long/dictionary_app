@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ListView?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListAddController">
+<AnchorPane fx:id="root" prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListAddController">
     <children>
-        <BorderPane layoutX="235.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor2" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-            <top>
-                <VBox prefHeight="91.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-                    <children>
+      <JFXScrollPane alignment="BOTTOM_CENTER" prefHeight="689.0" prefWidth="800.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="192.0" fitWidth="800.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../image/img.png" />
+                     </image>
+                  </ImageView>
                         <HBox prefHeight="30.0" prefWidth="800.0">
                             <children>
                                 <JFXButton fx:id="prev" onAction="#prev" text=" ">
@@ -31,34 +33,19 @@
                                         </ImageView>
                                     </graphic>
                                 </JFXButton>
-                                <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                            </children>
-                            <VBox.margin>
-                                <Insets />
-                            </VBox.margin>
-                        </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
+                                <Region prefHeight="42.0" prefWidth="162.0" HBox.hgrow="ALWAYS" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Chọn các từ đã add để sửa ">
                            <font>
                               <Font name="Cambria Bold" size="36.0" />
                            </font>
                         </Text>
-                     </children>
-                  </HBox>
-                    </children>
-                </VBox>
-            </top>
-            <bottom>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="38.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
-            </bottom>
-            <center>
-                <StackPane fx:id="root" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                    <children>
-                        <ListView fx:id="listGroup" prefHeight="529.0" prefWidth="800.0" />
-                    </children>
-                </StackPane>
-            </center>
-        </BorderPane>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                            </children>
+                        </HBox>
+               </children>
+            </AnchorPane>
+            <JFXListView fx:id="listGroup" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="749.0" styleClass="mylistview" stylesheets="@styles.css" />
+         </children>
+      </JFXScrollPane>
     </children>
 </AnchorPane>

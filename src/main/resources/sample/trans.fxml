@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -25,7 +26,7 @@
          <center>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="100.0" prefWidth="388.0" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="402.0" prefWidth="356.0" HBox.hgrow="ALWAYS">
                      <children>
                         <HBox prefHeight="42.0" prefWidth="800.0">
                            <children>
@@ -34,7 +35,7 @@
                                     <Insets />
                                  </HBox.margin>
                               </Label>
-                              <JFXButton onAction="#audioAction" text=" ">
+                              <JFXButton onAction="#audioAction" styleClass="buttonSearch" stylesheets="@styles.css" text=" ">
                                  <graphic>
                                     <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -43,10 +44,10 @@
                                     </ImageView>
                                  </graphic>
                               </JFXButton>
-                              <Region prefHeight="34.0" prefWidth="230.0" HBox.hgrow="ALWAYS" />
+                              <Region prefHeight="34.0" prefWidth="179.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
-                        <TextArea fx:id="input_prg" prefHeight="385.0" prefWidth="343.0" promptText="Nhập văn bản cần dịch " VBox.vgrow="ALWAYS">
+                        <TextArea fx:id="input_prg" prefHeight="368.0" prefWidth="336.0" promptText="Nhập văn bản cần dịch " VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -56,9 +57,9 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="402.0" prefWidth="49.0">
+                  <VBox alignment="CENTER" prefHeight="402.0" prefWidth="59.0">
                      <children>
-                        <JFXButton text=" ">
+                        <JFXButton onAction="#swap" prefWidth="0.0" styleClass="buttonSearch" stylesheets="@styles.css" text=" ">
                            <graphic>
                               <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -68,12 +69,15 @@
                            </graphic>
                         </JFXButton>
                      </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </VBox>
                   <VBox prefHeight="427.0" prefWidth="367.0" HBox.hgrow="ALWAYS">
                      <children>
                         <HBox prefHeight="37.0" prefWidth="367.0">
                            <children>
-                              <JFXButton fx:id="prg" buttonType="RAISED" onAction="#trans_prg" styleClass="backgroundColor" stylesheets="@styles.css">
+                              <JFXButton fx:id="prg" buttonType="RAISED" onAction="#trans_prg" prefHeight="34.0" prefWidth="134.0" stylesheets="@styles.css">
                                  <graphic>
                                     <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -81,7 +85,12 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <styleClass>
+                                    <String fx:value="backgroundColor" />
+                                    <String fx:value="buttonSearch" />
+                                 </styleClass>
                               </JFXButton>
+                              <ChoiceBox fx:id="choiceBox" prefHeight="38.0" prefWidth="94.0" />
                               <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
@@ -122,9 +131,8 @@
                               <Font name="Cambria Bold" size="44.0" />
                            </font>
                         </Text>
-                        <ChoiceBox fx:id="choiceBox" prefHeight="30.0" prefWidth="51.0" />
-                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <Region prefHeight="100.0" prefWidth="156.0" HBox.hgrow="ALWAYS" />
+                        <ImageView fitHeight="96.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/LOGO.png" />
                            </image>

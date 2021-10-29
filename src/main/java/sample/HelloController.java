@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,7 +51,7 @@ public class HelloController implements Initializable {
     public static String[] lang = {"Anh-Viet", "Viet-Anh"};
 
     public static void getListWord() throws SQLException {
-        listWord = database_manage.list_word();
+        listWord = database_manage.list_word(nameTable);
     }
 
     @FXML
@@ -201,8 +202,26 @@ public class HelloController implements Initializable {
                 String language = t1;
                 if (language == "Viet-Anh") {
                     nameTable = "va";
+                    try {
+                        getListWord();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    psWord.clear();
+                    Collections.addAll(psWord, listWord);
+                    autoCompletionBinding.dispose();
+                    autoCompletionBinding = TextFields.bindAutoCompletion(tfinput,psWord);
                 } else {
                     nameTable = "av";
+                    try {
+                        getListWord();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    psWord.clear();
+                    Collections.addAll(psWord, listWord);
+                    autoCompletionBinding.dispose();
+                    autoCompletionBinding = TextFields.bindAutoCompletion(tfinput,psWord);
                 }
             }
         });
@@ -223,7 +242,6 @@ public class HelloController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         /**Hoan tu dong, goi y.*/
         Collections.addAll(psWord, listWord);
         autoCompletionBinding = TextFields.bindAutoCompletion(tfinput,psWord);
@@ -258,52 +276,35 @@ public class HelloController implements Initializable {
             }
         });
 
+        slider.setTranslateX(-205);
         /**them cua so.*/
         HamburgerNextArrowBasicTransition burgerTask = new HamburgerNextArrowBasicTransition(h1);
         burgerTask.setRate(-1);
-        double leng = slider.getHeight();
-        slider.setTranslateX(-200);
-        web.setTranslateX(-100);
         h1.addEventHandler(MouseEvent.MOUSE_PRESSED, (e)->{
             burgerTask.setRate(burgerTask.getRate()*-1);
             burgerTask.play();
 
             if(burgerTask.getRate() == -1) {
                 /**mo.*/
-            TranslateTransition slide = new TranslateTransition();
-            slide.setDuration(Duration.seconds(0.4));
-            slide.setNode(slider);
-            slide.setToX(-200);
-            slide.play();
-            slider.setTranslateX(0);
+               translateAnimation(0.5, slider, -205);
 
-            TranslateTransition slide2 = new TranslateTransition();
-            slide2.setDuration(Duration.seconds(0.4));
-            slide2.setNode(web);
-            slide2.setToX(-100);
-            slide2.play();
-            web.setTranslateX(0);
+               translateAnimation(0.5, web, -205);
             } else {
+                translateAnimation(0.5, slider, 205);
 
-                TranslateTransition slide = new TranslateTransition();
-                slide.setDuration(Duration.seconds(0.4));
-                slide.setNode(slider);
-                slide.setToX(0);
-                slide.play();
-                slider.setTranslateX(-200);
+                translateAnimation(0.5, web, 205);
 
-                TranslateTransition slide2 = new TranslateTransition();
-                slide2.setDuration(Duration.seconds(0.4));
-                slide2.setNode(web);
-                slide2.setToX(0);
-                slide2.play();
-                web.setTranslateX(-100);
                 /** dong */
-
             }
         });
 
 
+    }
+
+    public void translateAnimation(double duration, Node node, double width) {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
+        translateTransition.setByX(width);
+        translateTransition.play();
     }
 
     /**hoc tu.*/

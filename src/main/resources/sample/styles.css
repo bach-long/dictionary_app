@@ -8,6 +8,7 @@
 .textBoxSearch{
      -fx-background-color: #FFFFFF;
      -fx-background-radius: 60;
+
 }
 .jfx-hamburger-icon{
     -fx-spacing: 5;
@@ -22,18 +23,34 @@
 
 .menuItem:hover{
     -fx-border-color: #36D9E8 ;
-    -fx-border-width: 0px 0px 2px 0px;
+
 }
 .buttonSearch:hover{
-    -fx-background-color: #36D9E8;
+    -fx-background-color: #4EA3FF;
 }
 
 .buttonRadius{
 -fx-background-radius: 30;
 }
+.backgroundWhite{
+-fx-background-color: #FFFFFF;
+}
 
 .sidebarItem:hover{
-    -fx-background-color: #36D9E8;
+    -fx-background-color: #4EA3FF;
     -fx-border-color: WHITE;
     -fx-border-width: 0px 0px 3px 0px;
+}
+
+.buttonSide:hover{
+    -fx-background-color: #4EA3FF;
+    -fx-border-color: WHITE;
+    -fx-border-width: 0px 3px 0px 0px;
+}
+
+.mylistview .scroll-bar:horizontal .thumb,
+.mylistview .scroll-bar:vertical .thumb {
+    -fx-background-color:derive(black,90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
 }

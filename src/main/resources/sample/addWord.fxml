@@ -23,6 +23,15 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
+                        <JFXButton onAction="#openListAdd" prefHeight="34.0" prefWidth="46.0" text=" ">
+                           <graphic>
+                              <ImageView fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/listHistory.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
                         <Region prefHeight="107.0" prefWidth="250.0" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ADDWORD" wrappingWidth="270.1367311477661">
                            <font>
@@ -71,14 +80,6 @@
             <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/home.png" />
-               </image>
-            </ImageView>
-         </graphic></JFXButton>
-      <JFXButton layoutX="748.0" layoutY="1.0" onAction="#openListAdd" text=" ">
-         <graphic>
-            <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/list.png" />
                </image>
             </ImageView>
          </graphic>

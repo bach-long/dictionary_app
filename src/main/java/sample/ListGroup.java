@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MultipleSelectionModel;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -22,6 +19,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ListGroup implements Initializable {
@@ -49,12 +47,18 @@ public class ListGroup implements Initializable {
     private TextArea nameGroup;
 
     @FXML
+    private ListView<String> listGroup1;
+
+    @FXML
     private ListView<String> listGroup;
 
     @FXML
     void addGroup(MouseEvent event) {
         dialog.show();
     }
+
+    @FXML
+    private ContextMenu listContexMenu;
 
 
     @Override
@@ -115,7 +119,18 @@ public class ListGroup implements Initializable {
             }
             stage.setScene(new Scene(root));
         });
-
-
     }
+    public void deleteItem() {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete todo item");
+        alert.setHeaderText("Delete item: ");
+        alert.setContentText("Are you sure? Press OK to confirm, or cancel to Back out.");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if(result.isPresent() && (result.get() == ButtonType.OK)){
+            //database_manage.delete_table();
+        }
+    }
+
 }

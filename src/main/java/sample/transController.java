@@ -50,6 +50,22 @@ public class transController implements Initializable {
     private Text text;
 
     @FXML
+    void swap(ActionEvent event) {
+        if (language == "Việt-Anh") {
+            from = "en";
+            to = "vi";
+            language = "Anh-Việt";
+            text.setText(language);
+        } else {
+            language = "Việt-Anh";
+            from = "vi";
+            to = "en";
+            text.setText(language);
+        }
+    }
+
+
+    @FXML
     protected void prevhController(MouseEvent event) throws IOException {
         Stage stage = (Stage)prev.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
