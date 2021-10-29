@@ -1,0 +1,3 @@
+--add-exports
+javafx.base/com.sun.javafx.event=org.controlsfx.controls
+copy phần bên trên dán tại VM để có thể sử dụng thư viện controlsfx
