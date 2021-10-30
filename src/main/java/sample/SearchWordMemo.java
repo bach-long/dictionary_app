@@ -59,19 +59,22 @@ public class SearchWordMemo implements Initializable {
     private WebView html_view;
     public WebEngine engine = null;
 
-    /**doc*/
-    public void audioAction (ActionEvent event) throws SQLException {
+    /**
+     * doc
+     */
+    public void audioAction(ActionEvent event) throws SQLException {
         try {
             TextToSpeech speech = new TextToSpeech();
             speech.toSpeech(listWord.get(x));
-        } catch(Exception e) {
+        } catch (Exception e) {
             engine.loadContent("<h1>This word doesn't exist</h1>");
         }
     }
 
+    /** chuyen den tu memo sau .*/
     @FXML
     void later(ActionEvent event) {
-        if(x > 0) {
+        if (x > 0) {
             x--;
         } else {
             x = listWord.size() - 1;
@@ -80,7 +83,7 @@ public class SearchWordMemo implements Initializable {
         engine = html_view.getEngine();
         String[] s = new String[0];
         try {
-            s = database_manage.search(listWord.get(x),"av");
+            s = database_manage.search(listWord.get(x), "av");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,7 +91,7 @@ public class SearchWordMemo implements Initializable {
             s[1] = "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
         }
         String v = s[0] + "\n Góp ý " + s[1];
-        if(s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
+        if (s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
             try {
                 s[0] = database_manage.user_search(listWord.get(x));
             } catch (SQLException e) {
@@ -104,18 +107,20 @@ public class SearchWordMemo implements Initializable {
         dialog.close();
     }
 
+    /** dong y tao group.*/
     @FXML
     void acpt(ActionEvent event) throws SQLException, IOException {
-        database_manage.user_delete(listWord.get(x),ListGroupOut.getGroup());
+        database_manage.user_delete(listWord.get(x), ListGroupOut.getGroup());
         dialog.close();
-        Stage stage = (Stage)next.getScene().getWindow();
+        Stage stage = (Stage) next.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("ListMemoView.fxml"));
         stage.setScene(new Scene(root));
     }
 
+    /**chuyen den tu memo tiep theo.*/
     @FXML
     void next(ActionEvent event) {
-        if(x < listWord.size() - 1) {
+        if (x < listWord.size() - 1) {
             x++;
         } else {
             x = 0;
@@ -124,7 +129,7 @@ public class SearchWordMemo implements Initializable {
         engine = html_view.getEngine();
         String[] s = new String[0];
         try {
-            s = database_manage.search(listWord.get(x),"av");
+            s = database_manage.search(listWord.get(x), "av");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,7 +137,7 @@ public class SearchWordMemo implements Initializable {
             s[1] = "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
         }
         String v = s[0] + "\n Góp ý " + s[1];
-        if(s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
+        if (s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
             try {
                 s[0] = database_manage.user_search(listWord.get(x));
             } catch (SQLException e) {
@@ -157,7 +162,7 @@ public class SearchWordMemo implements Initializable {
         engine = html_view.getEngine();
         String[] s = new String[0];
         try {
-            s = database_manage.search(listWord.get(x),"av");
+            s = database_manage.search(listWord.get(x), "av");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -165,7 +170,7 @@ public class SearchWordMemo implements Initializable {
             s[1] = "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
         }
         String v = s[0] + "\n Góp ý " + s[1];
-        if(s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
+        if (s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
             try {
                 s[0] = database_manage.user_search(listWord.get(x));
             } catch (SQLException e) {
@@ -174,8 +179,8 @@ public class SearchWordMemo implements Initializable {
             v = s[0] + "\n Góp ý" + "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
         }
         engine.loadContent(v);
-        prev.setOnMouseClicked(MouseEvent->{
-            Stage stage = (Stage)prev.getScene().getWindow();
+        prev.setOnMouseClicked(MouseEvent -> {
+            Stage stage = (Stage) prev.getScene().getWindow();
             Parent root = null;
             try {
                 root = FXMLLoader.load(getClass().getResource("ListMemoView.fxml"));

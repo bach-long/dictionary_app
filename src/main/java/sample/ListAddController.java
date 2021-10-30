@@ -41,7 +41,7 @@ public class ListAddController implements Initializable {
     @FXML
     private JFXListView<String> listGroup;
 
-
+    /**quay lai man hinh chinh.*/
     @FXML
     void prev(ActionEvent event) throws IOException {
         Stage stage = (Stage)prev.getScene().getWindow();
@@ -49,7 +49,7 @@ public class ListAddController implements Initializable {
         stage.setScene(new Scene(root));
     }
 
-
+    /**ham chinh.*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {

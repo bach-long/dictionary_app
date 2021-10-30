@@ -39,53 +39,65 @@ public class ListMemoView implements Initializable {
     @FXML
     private StackPane root;
 
+
+    /**an button flash.*/
     @FXML
     void onFlashCard(ActionEvent event) throws IOException {
-        Stage stage = (Stage)prev.getScene().getWindow();
+        Stage stage = (Stage) prev.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("flashCard.fxml"));
         stage.setScene(new Scene(root));
     }
 
+    /**quay tro ve.*/
     @FXML
     void prevController(MouseEvent event) throws IOException {
-        Stage stage = (Stage)prev.getScene().getWindow();
+        Stage stage = (Stage) prev.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("listGroupOut.fxml"));
         stage.setScene(new Scene(root));
     }
 
+    /**acept tu.*/
     @FXML
-    void acpt(ActionEvent event) throws SQLException {
+    void acpt(ActionEvent event) throws SQLException, IOException {
         database_manage.delete_table(ListGroupOut.group);
         dialog.close();
+        Stage stage = (Stage) prev.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("listGroupOut.fxml"));
+        stage.setScene(new Scene(root));
     }
 
+    /**dong dialog.*/
     @FXML
     void dec(ActionEvent event) {
         dialog.close();
     }
 
+    /**mo dialog xoa.*/
     @FXML
     void removeGroup(ActionEvent event) {
         dialog.show();
     }
 
+    /**ham chinh.*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dialog.setTransitionType(JFXDialog.DialogTransition.TOP);
         dialog.setDialogContainer(root);
         groupSave = ListGroupOut.getGroup();
+        //tao danh sach
         try {
             wordMemo = database_manage.get_list(groupSave);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //chon tu
         listWord.getItems().addAll(wordMemo);
         listWord.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 word = t1;
                 vitri = listWord.getSelectionModel().getSelectedIndex();
-                Stage stage = (Stage)listWord.getScene().getWindow();
+                Stage stage = (Stage) listWord.getScene().getWindow();
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(getClass().getResource("SearchWordMemo.fxml"));

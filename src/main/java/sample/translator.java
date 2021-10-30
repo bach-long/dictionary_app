@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class translator {
 
+    /**API.*/
     public static String translate(String langFrom, String langTo, String text) throws IOException {
         // INSERT YOU URL HERE
         try {
@@ -28,7 +29,7 @@ public class translator {
             }
             in.close();
             return response.toString();
-        } catch(Exception e) {
+        } catch (Exception e) {
             return "Network may not be connected";
         }
     }

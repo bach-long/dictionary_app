@@ -56,15 +56,16 @@ public class ListGroupOut implements Initializable {
         dialog.show();
     }
 
-    public static String getGroup(){
+    public static String getGroup() {
         return group;
     }
 
+    /**ham main chinh.*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dialog.setTransitionType(JFXDialog.DialogTransition.TOP);
         dialog.setDialogContainer(root);
-        dec.setOnMouseClicked(MouseEvent ->{
+        dec.setOnMouseClicked(MouseEvent -> {
             dialog.close();
         });
 
@@ -76,7 +77,7 @@ public class ListGroupOut implements Initializable {
         for (int i = 4; i < arrayGroup.size(); i++) {
             listGroup.getItems().add(arrayGroup.get(i));
         }
-        acpt.setOnMouseClicked(MouseEvent ->{
+        acpt.setOnMouseClicked(MouseEvent -> {
             String s = nameGroup.getText();
             try {
                 database_manage.add_group(s);
@@ -88,11 +89,12 @@ public class ListGroupOut implements Initializable {
         });
 
 
+        /** chon group trong memo.*/
         listGroup.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> obj, String oldVal, String newVal) {
                 group = newVal;
-                Stage stage = (Stage)listGroup.getScene().getWindow();
+                Stage stage = (Stage) listGroup.getScene().getWindow();
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(getClass().getResource("listMemoView.fxml"));
@@ -103,8 +105,8 @@ public class ListGroupOut implements Initializable {
             }
         });
 
-        prev.setOnMouseClicked(MouseEvent->{
-            Stage stage = (Stage)prev.getScene().getWindow();
+        prev.setOnMouseClicked(MouseEvent -> {
+            Stage stage = (Stage) prev.getScene().getWindow();
             Parent root = null;
             try {
                 root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));

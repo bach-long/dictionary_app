@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDialog?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TextArea?>
@@ -11,6 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -18,51 +20,6 @@
 <AnchorPane prefHeight="700.0" prefWidth="800.0" styleClass="backgroundColor2" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddWord">
    <children>
       <BorderPane layoutX="142.0" layoutY="480.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
-         <center>
-            <VBox alignment="CENTER" prefHeight="544.0" prefWidth="760.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <JFXButton onAction="#openListAdd" prefHeight="34.0" prefWidth="46.0" text=" ">
-                           <graphic>
-                              <ImageView fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/listHistory.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
-                        <Region prefHeight="107.0" prefWidth="250.0" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ADDWORD" wrappingWidth="270.1367311477661">
-                           <font>
-                              <Font name="Cambria Bold" size="52.0" />
-                           </font>
-                        </Text>
-                        <Region prefHeight="107.0" prefWidth="165.0" />
-                        <ImageView fitHeight="107.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/LOGO.png" />
-                           </image>
-                           <effect>
-                              <ColorAdjust />
-                           </effect>
-                        </ImageView>
-                     </children>
-                  </HBox>
-                  <TextArea fx:id="wordAddIn" prefHeight="65.0" prefWidth="760.0" promptText="Nhập từ cần add" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </TextArea>
-                  <Region prefHeight="18.0" prefWidth="760.0" VBox.vgrow="ALWAYS" />
-                  <TextArea fx:id="meanAddIn" prefHeight="260.0" prefWidth="800.0" promptText="Nghĩa của từ" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                     </VBox.margin>
-                  </TextArea>
-               </children>
-            </VBox>
-         </center>
          <bottom>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="760.0" BorderPane.alignment="CENTER">
                <children>
@@ -74,6 +31,68 @@
                </children>
             </HBox>
          </bottom>
+         <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="544.0" prefWidth="760.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton onAction="#openListAdd" prefHeight="34.0" prefWidth="46.0" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/listHistory.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <Region prefHeight="107.0" prefWidth="250.0" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ADDWORD" wrappingWidth="270.1367311477661">
+                                 <font>
+                                    <Font name="Cambria Bold" size="52.0" />
+                                 </font>
+                              </Text>
+                              <Region prefHeight="107.0" prefWidth="165.0" />
+                              <ImageView fitHeight="107.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../image/LOGO.png" />
+                                 </image>
+                                 <effect>
+                                    <ColorAdjust />
+                                 </effect>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="wordAddIn" prefHeight="110.0" prefWidth="720.0" promptText="Nhập từ cần add" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </TextArea>
+                        <Region prefHeight="94.0" prefWidth="760.0" VBox.vgrow="ALWAYS" />
+                        <StackPane fx:id="root" prefHeight="260.0" prefWidth="760.0">
+                           <children>
+                              <JFXDialog fx:id="dialog" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="206.0" prefWidth="420.0" styleClass="backgroundColor" stylesheets="@styles.css">
+                                 <children>
+                                    <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Không thể add do " wrappingWidth="327.7367362976074">
+                                       <font>
+                                          <Font size="32.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </JFXDialog>
+                              <TextArea fx:id="meanAddIn" prefHeight="173.0" prefWidth="760.0" promptText="Nghĩa của từ">
+                                 <StackPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </StackPane.margin>
+                              </TextArea>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+         </center>
       </BorderPane>
       <JFXButton fx:id="prev" alignment="TOP_LEFT" buttonType="RAISED" layoutY="1.0" onMouseClicked="#prevController" styleClass="menuItem" stylesheets="@styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <graphic>

@@ -19,7 +19,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ListGroupOut">
     <children>
-        <BorderPane layoutX="235.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor2" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+        <BorderPane layoutX="235.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" styleClass="backgroundColor2" stylesheets="@styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
                 <VBox prefHeight="62.0" prefWidth="775.0" BorderPane.alignment="CENTER">
                     <children>
@@ -35,6 +35,12 @@
                                     </graphic>
                                 </JFXButton>
                                 <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LIST GROUP" wrappingWidth="252.5367431640625">
+                           <font>
+                              <Font size="33.0" />
+                           </font>
+                        </Text>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
                                 <JFXButton fx:id="addGroup" layoutX="10.0" layoutY="10.0" onMouseClicked="#addGroup" text=" ">
                                     <graphic>
                                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">

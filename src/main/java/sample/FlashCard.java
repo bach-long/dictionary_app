@@ -56,12 +56,13 @@ public class FlashCard implements Initializable {
     private Label text2;
 
 
+    /**quay lai tu truoc do.*/
     @FXML
     void later(ActionEvent event) throws IOException {
-        if(check) {
+        if (check) {
             show--;
-            if(show <= 0) {
-                show = listWord.size() -1;
+            if (show <= 0) {
+                show = listWord.size() - 1;
             }
             number.setText((show + 1) + " / " + size);
             text2.setText((show + 1) + " / " + size);
@@ -70,13 +71,13 @@ public class FlashCard implements Initializable {
             word2.setText(listWord.get(show));
             page2.setTranslateX(800);
             translateAnimation(0.25, page2, -800);
-            translateAnimation(0.25,page1, -800);
+            translateAnimation(0.25, page1, -800);
             check = false;
 
         } else {
             show--;
-            if(show <= 0) {
-                show = listWord.size() -1;
+            if (show <= 0) {
+                show = listWord.size() - 1;
             }
             number.setText((show + 1) + " / " + size);
             text2.setText((show + 1) + " / " + size);
@@ -85,24 +86,26 @@ public class FlashCard implements Initializable {
             word1.setText(listWord.get(show));
             page1.setTranslateX(800);
             translateAnimation(0.25, page1, -800);
-            translateAnimation(0.25,page2, -800);
+            translateAnimation(0.25, page2, -800);
             check = true;
         }
 
     }
 
+    /**tro ve man hinh chinh.*/
     @FXML
     void prev(ActionEvent event) throws IOException {
-        Stage stage = (Stage)prev.getScene().getWindow();
+        Stage stage = (Stage) prev.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("listMemoView.fxml"));
         stage.setScene(new Scene(root));
     }
 
+    /**chuyen den tu tiep theo.*/
     @FXML
     void next(ActionEvent event) throws IOException {
-        if(check) {
+        if (check) {
             show++;
-            if(show >= listWord.size()) {
+            if (show >= listWord.size()) {
                 show = 0;
             }
             number.setText((show + 1) + " / " + size);
@@ -112,13 +115,13 @@ public class FlashCard implements Initializable {
             mean2.setText(s);
             page2.setTranslateX(-800);
             translateAnimation(0.5, page2, 800);
-            translateAnimation(0.5, page1,800);
+            translateAnimation(0.5, page1, 800);
             check = false;
 
 
         } else {
             show++;
-            if(show >= listWord.size()) {
+            if (show >= listWord.size()) {
                 show = 0;
             }
             number.setText((show + 1) + " / " + size);
@@ -128,25 +131,28 @@ public class FlashCard implements Initializable {
             mean1.setText(s);
             page1.setTranslateX(-800);
             translateAnimation(0.5, page1, 800);
-            translateAnimation(0.5, page2,800);
+            translateAnimation(0.5, page2, 800);
             check = true;
 
         }
     }
 
+    /**hieu ung chuyen canh.*/
     public void translateAnimation(double duration, Node node, double width) {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
         translateTransition.setByX(width);
         translateTransition.play();
     }
 
+    /**loa .*/
     @FXML
     void audio(ActionEvent event) {
-            TextToSpeech speech = new TextToSpeech();
-            speech.toSpeech(listWord.get(show));
+        TextToSpeech speech = new TextToSpeech();
+        speech.toSpeech(listWord.get(show));
     }
 
 
+    /**ham chinh.*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -165,7 +171,7 @@ public class FlashCard implements Initializable {
         text2.setText((show + 1) + " / " + size);
         mean1.setText(s);
         word1.setText(listWord.get(show));
-        translateAnimation(0.1,page2,-800);
+        translateAnimation(0.1, page2, -800);
         //translateAnimation(0.1,page1,-800);
     }
 }

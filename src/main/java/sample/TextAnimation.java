@@ -2,7 +2,7 @@ package sample;
 
 import java.util.Random;
 
-public class TextAnimation implements Runnable{
+public class TextAnimation implements Runnable {
     private String text;
     private int animationTime;
     private TextOutput textOutput;
@@ -14,12 +14,13 @@ public class TextAnimation implements Runnable{
         this.textOutput = textField;
     }
 
+    /**hieu ung chu.*/
     @Override
     public void run() {
 
         try {
             for (int i = 0; i <= text.length(); i++) {
-                String textAtThisPoint = text.substring(0,i);
+                String textAtThisPoint = text.substring(0, i);
 
                 textOutput.writeText(textAtThisPoint);
                 Thread.sleep(animationTime + random.nextInt(50));

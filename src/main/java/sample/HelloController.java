@@ -36,7 +36,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
 import java.awt.*;
+
 import javafx.util.Duration;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
@@ -44,7 +46,7 @@ import org.controlsfx.control.textfield.TextFields;
 public class HelloController implements Initializable {
     private static String namePerson = "Person";
     public static String wordMemoAdd;
-    public  boolean an = false;
+    public boolean an = false;
     public static String nameTable = "av";
 
     public static String[] listWord = null;
@@ -99,6 +101,7 @@ public class HelloController implements Initializable {
         Desktop.getDesktop().browse(new URI("https://www.facebook.com/anh.tranthe.98622"));
     }
 
+    /**dialog tao name.*/
     @FXML
     void acpt(MouseEvent event) {
         namePerson = inName.getText();
@@ -109,24 +112,27 @@ public class HelloController implements Initializable {
 
     @FXML
     void searchOnGG(ActionEvent event) throws URISyntaxException, IOException {
-       Desktop.getDesktop().browse(new URI("https://translate.google.com"));
+        Desktop.getDesktop().browse(new URI("https://translate.google.com"));
     }
 
+    /**button trans.*/
     @FXML
     void switchToScene1(MouseEvent event) throws IOException {
-        Stage stage = (Stage)next.getScene().getWindow();
+        Stage stage = (Stage) next.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("trans.fxml"));
         stage.setScene(new Scene(root));
     }
 
+    /**button add.*/
     @FXML
     void addWord(MouseEvent event) throws IOException {
-        Stage stage = (Stage)next.getScene().getWindow();
+        Stage stage = (Stage) next.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("AddWord.fxml"));
         stage.setScene(new Scene(root));
     }
 
 
+    /**tim kiem bang chuot.*/
     public void submit(ActionEvent event) throws SQLException {
         String input = tfinput.getText();
         wordMemoAdd = input;
@@ -136,56 +142,63 @@ public class HelloController implements Initializable {
             an = true;
             bottomBox.setVisible(true);
             memo.setVisible(true);
-            String[] s = database_manage.search(input,nameTable);
+            String[] s = database_manage.search(input, nameTable);
             if (s[1] == null) {
                 s[1] = "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
             }
             String v = s[0] + "\n Góp ý " + s[1];
-            if(s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
+            if (s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
                 s[0] = database_manage.user_search(input);
                 v = s[0] + "\n Góp ý" + "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
             }
             engine.loadContent(v);
-        } catch(Exception e) {
+        } catch (Exception e) {
             engine.loadContent("<h1>This word doesn't exist</h1>");
         }
     }
 
-    /**doc*/
-    public void audioAction (ActionEvent event) throws SQLException {
+    /**
+     * doc
+     */
+    public void audioAction(ActionEvent event) throws SQLException {
         try {
             TextToSpeech speech = new TextToSpeech();
             speech.toSpeech(tfinput.getText());
-        } catch(Exception e) {
+        } catch (Exception e) {
             engine.loadContent("<h1>This word doesn't exist</h1>");
         }
     }
 
-    /**buttonMemoAdd.*/
+    /**
+     * buttonMemoAdd.
+     */
     @FXML
     void memo(MouseEvent event) throws IOException {
-        Stage stage = (Stage)memo.getScene().getWindow();
+        Stage stage = (Stage) memo.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("listGroup.fxml"));
         stage.setScene(new Scene(root));
     }
 
-    /**ViewMemoAdd.*/
+    /**
+     * ViewMemoAdd.
+     */
     @FXML
     void openList(MouseEvent event) throws IOException {
-        Stage stage = (Stage)ListMemo.getScene().getWindow();
+        Stage stage = (Stage) ListMemo.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("listGroupOut.fxml"));
         stage.setScene(new Scene(root));
     }
 
+    /**tao comment.*/
     @FXML
     void sendComment(ActionEvent event) {
-            String c = namePerson + ": "+boxComment.getText() + "\n";
-            try {
-                database_manage.comment(c,tfinput.getText(),nameTable);
-                submit(event);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        String c = namePerson + ": " + boxComment.getText() + "\n";
+        try {
+            database_manage.comment(c, tfinput.getText(), nameTable);
+            submit(event);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -210,7 +223,7 @@ public class HelloController implements Initializable {
                     psWord.clear();
                     Collections.addAll(psWord, listWord);
                     autoCompletionBinding.dispose();
-                    autoCompletionBinding = TextFields.bindAutoCompletion(tfinput,psWord);
+                    autoCompletionBinding = TextFields.bindAutoCompletion(tfinput, psWord);
                 } else {
                     nameTable = "av";
                     try {
@@ -221,7 +234,7 @@ public class HelloController implements Initializable {
                     psWord.clear();
                     Collections.addAll(psWord, listWord);
                     autoCompletionBinding.dispose();
-                    autoCompletionBinding = TextFields.bindAutoCompletion(tfinput,psWord);
+                    autoCompletionBinding = TextFields.bindAutoCompletion(tfinput, psWord);
                 }
             }
         });
@@ -229,11 +242,11 @@ public class HelloController implements Initializable {
         /**Login.*/
         dialogLogin.setTransitionType(JFXDialog.DialogTransition.BOTTOM);
         dialogLogin.setDialogContainer(root);
-        dec.setOnMouseClicked(MouseEvent ->{
+        dec.setOnMouseClicked(MouseEvent -> {
             dialogLogin.close();
         });
 
-        login.setOnMouseClicked(MouseEvent->{
+        login.setOnMouseClicked(MouseEvent -> {
             dialogLogin.show();
         });
 
@@ -244,7 +257,7 @@ public class HelloController implements Initializable {
         }
         /**Hoan tu dong, goi y.*/
         Collections.addAll(psWord, listWord);
-        autoCompletionBinding = TextFields.bindAutoCompletion(tfinput,psWord);
+        autoCompletionBinding = TextFields.bindAutoCompletion(tfinput, psWord);
         tfinput.setOnKeyPressed((KeyEvent e) -> {
             switch (e.getCode()) {
                 case ENTER:
@@ -257,17 +270,17 @@ public class HelloController implements Initializable {
                         an = true;
                         bottomBox.setVisible(true);
                         memo.setVisible(true);
-                        String[] s = database_manage.search(input,nameTable);
+                        String[] s = database_manage.search(input, nameTable);
                         if (s[1] == null) {
                             s[1] = "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
                         }
                         String v = s[0] + "\n Góp ý " + s[1];
-                        if(s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
+                        if (s[0].equals("<h1 style=\"color:Tomato;\"> This word doesn't exist </h1>")) {
                             s[0] = database_manage.user_search(input);
                             v = s[0] + "\n Góp ý" + "<h1 style=\"color:Tomato;\"> Chưa có góp ý </h1>";
                         }
                         engine.loadContent(v);
-                    } catch(Exception e1) {
+                    } catch (Exception e1) {
                         engine.loadContent("<h1>This word doesn't exist</h1>");
                     }
                     break;
@@ -280,15 +293,15 @@ public class HelloController implements Initializable {
         /**them cua so.*/
         HamburgerNextArrowBasicTransition burgerTask = new HamburgerNextArrowBasicTransition(h1);
         burgerTask.setRate(-1);
-        h1.addEventHandler(MouseEvent.MOUSE_PRESSED, (e)->{
-            burgerTask.setRate(burgerTask.getRate()*-1);
+        h1.addEventHandler(MouseEvent.MOUSE_PRESSED, (e) -> {
+            burgerTask.setRate(burgerTask.getRate() * -1);
             burgerTask.play();
 
-            if(burgerTask.getRate() == -1) {
+            if (burgerTask.getRate() == -1) {
                 /**mo.*/
-               translateAnimation(0.5, slider, -205);
+                translateAnimation(0.5, slider, -205);
 
-               translateAnimation(0.5, web, -205);
+                translateAnimation(0.5, web, -205);
             } else {
                 translateAnimation(0.5, slider, 205);
 
@@ -301,16 +314,19 @@ public class HelloController implements Initializable {
 
     }
 
+    /**tao hieu ung chuyen canh.*/
     public void translateAnimation(double duration, Node node, double width) {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(duration), node);
         translateTransition.setByX(width);
         translateTransition.play();
     }
 
-    /**hoc tu.*/
+    /**
+     * hoc tu.
+     */
     private void learnWord(String text) {
         psWord.add(text);
-        if(autoCompletionBinding != null){
+        if (autoCompletionBinding != null) {
             autoCompletionBinding.dispose();
         }
         autoCompletionBinding = TextFields.bindAutoCompletion(tfinput, psWord);

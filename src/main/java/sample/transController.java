@@ -65,13 +65,15 @@ public class transController implements Initializable {
     }
 
 
+    /**quay lai man hinh chinh .*/
     @FXML
     protected void prevhController(MouseEvent event) throws IOException {
-        Stage stage = (Stage)prev.getScene().getWindow();
+        Stage stage = (Stage) prev.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
         stage.setScene(new Scene(root));
     }
 
+    /**dichj doan */
     public void trans_prg(ActionEvent event) throws IOException {
         String text = input_prg.getText();
         engine = prg_view.getEngine();
@@ -79,15 +81,17 @@ public class transController implements Initializable {
         engine.loadContent(s);
     }
 
-    public void audioAction (ActionEvent event) throws SQLException {
+    /**doc doan dich.*/
+    public void audioAction(ActionEvent event) throws SQLException {
         try {
             TextToSpeech speech = new TextToSpeech();
             speech.toSpeech(input_prg.getText());
-        } catch(Exception e) {
+        } catch (Exception e) {
             engine.loadContent("<h1>This word doesn't exist</h1>");
         }
     }
 
+    /**ham chinh.*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         /**chon ngon ngu.*/

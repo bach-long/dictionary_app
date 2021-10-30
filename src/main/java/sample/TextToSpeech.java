@@ -5,11 +5,13 @@ import com.sun.speech.freetts.VoiceManager;
 
 public class TextToSpeech {
     private Voice voice;
+
     TextToSpeech() {
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
         voice = VoiceManager.getInstance().getVoice("kevin16");
     }
 
+    /**freetts.*/
     public void toSpeech(String s) {
         if (voice != null) {
             voice.allocate();

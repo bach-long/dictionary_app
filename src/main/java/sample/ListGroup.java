@@ -60,12 +60,12 @@ public class ListGroup implements Initializable {
     @FXML
     private ContextMenu listContexMenu;
 
-
+    /**ham main.*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dialog.setTransitionType(JFXDialog.DialogTransition.TOP);
         dialog.setDialogContainer(root);
-        dec.setOnMouseClicked(MouseEvent ->{
+        dec.setOnMouseClicked(MouseEvent -> {
             dialog.close();
         });
 
@@ -78,7 +78,7 @@ public class ListGroup implements Initializable {
             listGroup.getItems().add(arrayGroup.get(i));
         }
         //listGroup.getItems().addAll(arrayGroup);
-        acpt.setOnMouseClicked(MouseEvent ->{
+        acpt.setOnMouseClicked(MouseEvent -> {
             String s = nameGroup.getText();
             try {
                 database_manage.add_group(s);
@@ -89,7 +89,7 @@ public class ListGroup implements Initializable {
             dialog.close();
         });
 
-
+        /**choonj group khi add.*/
         listGroup.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> obj, String oldVal, String newVal) {
@@ -98,7 +98,7 @@ public class ListGroup implements Initializable {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                Stage stage = (Stage)prev.getScene().getWindow();
+                Stage stage = (Stage) prev.getScene().getWindow();
                 Parent root = null;
                 try {
                     root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -109,8 +109,9 @@ public class ListGroup implements Initializable {
             }
         });
 
-        prev.setOnMouseClicked(MouseEvent->{
-            Stage stage = (Stage)prev.getScene().getWindow();
+        /**button add.*/
+        prev.setOnMouseClicked(MouseEvent -> {
+            Stage stage = (Stage) prev.getScene().getWindow();
             Parent root = null;
             try {
                 root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -120,6 +121,8 @@ public class ListGroup implements Initializable {
             stage.setScene(new Scene(root));
         });
     }
+
+    /**xoa item.*/
     public void deleteItem() {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -128,7 +131,7 @@ public class ListGroup implements Initializable {
         alert.setContentText("Are you sure? Press OK to confirm, or cancel to Back out.");
         Optional<ButtonType> result = alert.showAndWait();
 
-        if(result.isPresent() && (result.get() == ButtonType.OK)){
+        if (result.isPresent() && (result.get() == ButtonType.OK)) {
             //database_manage.delete_table();
         }
     }
